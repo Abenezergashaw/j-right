@@ -1,0 +1,837 @@
+<script setup>
+const {
+  getTopMatch,
+  getTopLeagues,
+  getEventsPerLeague,
+  getPopMatches,
+  getUpcomingMatches,
+} = useData();
+
+const { topLeaguesData, activeSport, topSports, topLeaguesName, activeLeague } =
+  useTopLeague();
+
+const { topMenu, setPrematchData } = usePrematchData();
+
+const { topMatches } = useTopMatches();
+const { popularMatches } = usePopMatches();
+
+const activeLeagueData = ref([]);
+const lastMinute = ref([]);
+
+const sportPromo = [
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17613180572446.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17613180644926.jpg",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/jambobet.bet\/jackpot\/active\/jackpot-1181",
+    btn_bg_color: "rgb(12, 12, 11)",
+    btn_text_color: "rgb(234, 223, 6)",
+    btn_target: "_self",
+    order: 1,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#ffffff",
+    banners: [],
+    overline: null,
+    overline_color: null,
+    title_color: null,
+    subtitle_color: null,
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17593217063370.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17593217115665.jpg",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/jambobet.bet\/jackpot\/active\/jackpot-1156",
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "rgb(229, 209, 14)",
+    btn_target: "_self",
+    order: 2,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17543067283932.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17543067533556.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 3,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17496661657215.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17496661717156.jpg",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/jambobet.bet\/jackpot\/active\/jackpot-949",
+    btn_bg_color: "rgb(255, 199, 24)",
+    btn_text_color: "rgb(0, 0, 0)",
+    btn_target: "_self",
+    order: 4,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17538651452891.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17538841946111.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 5,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17522222627023.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17522362029929.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 6,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17496659603067.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17496659687017.jpg",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/melabets.com\/jackpot\/active\/jackpot-941",
+    btn_bg_color: "rgb(255, 255, 255)",
+    btn_text_color: "rgb(65, 150, 14)",
+    btn_target: "_self",
+    order: 7,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#ffffff",
+    banners: [],
+    overline: null,
+    overline_color: null,
+    title_color: null,
+    subtitle_color: null,
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17641578407147.png",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17641578476862.png",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/jambobet.bet\/virtual-casino\/slot\/144708\/",
+    btn_bg_color: "rgb(255, 227, 90)",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 8,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17494198849555.png",
+    mobile_image_url: null,
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 9,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17512252057025.png",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17512252165379.png",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 10,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17376525815644.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17376548782225.jpg",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/melabets.com\/jackpot\/active\/jackpot-839",
+    btn_bg_color: "#9acd32",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 11,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: null,
+    title_color: null,
+    subtitle_color: null,
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17519598574925.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17519598708999.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 12,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17522226014222.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17522361368813.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 13,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17526555778437.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17525980119718.jpg",
+    btn_text: "PLAY NOW",
+    btn_url: "https:\/\/jambobet.bet\/virtual-casino\/smartfot-prize-drop",
+    btn_bg_color: "rgb(255, 199, 24)",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 14,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17368479974443.png",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17422815913128.png",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 15,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17204638356324.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17365915483732.png",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#9acd32",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 16,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#ffffff",
+    banners: [],
+    overline: null,
+    overline_color: null,
+    title_color: null,
+    subtitle_color: null,
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17438309084825.png",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17438309588735.png",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "rgb(154, 205, 50)",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 17,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: null,
+    title_color: null,
+    subtitle_color: null,
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17234755705711.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17365929532579.png",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "rgb(154, 205, 50)",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 18,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#ffffff",
+    banners: [],
+    overline: null,
+    overline_color: null,
+    title_color: null,
+    subtitle_color: null,
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17423648846423.png",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17422813436660.png",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 19,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17538652968662.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17542584276714.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 20,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17538653505603.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17542584413927.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 21,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17553832645491.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17553833034520.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 22,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17557614821047.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17557614918362.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 23,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17571810791135.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17571810971035.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 24,
+    type: "center",
+    active: "no",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610398687712.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610401851542.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 25,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610402521181.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610402361123.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 26,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610403226053.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610403142352.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 27,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610403803215.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17610403739421.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 28,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17633119172758.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17633118999544.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 29,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+  {
+    title: null,
+    subtitle: null,
+    image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17634857477583.jpg",
+    mobile_image_url:
+      "https:\/\/assets.plqcdn.com\/storage\/slider\/17634857167763.jpg",
+    btn_text: null,
+    btn_url: null,
+    btn_bg_color: "#FFFFFF",
+    btn_text_color: "#000000",
+    btn_target: "_self",
+    order: 30,
+    type: "center",
+    active: "yes",
+    from: null,
+    to: null,
+    css_background_color: "#FFFFFF",
+    banners: [],
+    overline: null,
+    overline_color: "#000000",
+    title_color: "#000000",
+    subtitle_color: "#000000",
+    autoscroll: 3000,
+  },
+];
+
+async function handleChangeSport(id) {
+  activeSport.value = id;
+  activeLeague.value = topLeaguesName.value[0].Items[0].Value;
+  activeLeagueData.value = await getEventsPerLeague(activeLeague.value);
+}
+
+async function handleChangeActiveLeague(value) {
+  activeLeague.value = value;
+  activeLeagueData.value = await getEventsPerLeague(activeLeague.value);
+}
+
+onMounted(async () => {
+  await setPrematchData();
+  activeLeagueData.value = await getEventsPerLeague(activeLeague.value);
+  lastMinute.value = await getUpcomingMatches(0, 50);
+});
+</script>
+
+<template>
+  <MainMenu :topMenu="topMenu" filter="All" />
+
+  <PromoSlider v-if="true" :promos="sportPromo" />
+
+  <TitleBar />
+
+  <TopMatchCard :data="topMatches" />
+
+  <TitleBar
+    class="md:hidden"
+    title="Top Leagues"
+    :data="topSports"
+    :activeSport="activeSport"
+    @changeSport="handleChangeSport"
+  />
+
+  <TopLeagues
+    class="md:hidden"
+    :topLeaguesName="topLeaguesName"
+    :activeLeague="activeLeague"
+    @changeActiveLeague="handleChangeActiveLeague"
+  />
+
+  <SportOdds class="md:hidden" :showMore="1" :data="activeLeagueData" />
+
+  <TitleBar title="Popular Matches" />
+
+  <SportOdds :showMore="1" :data="popularMatches" />
+
+  <TitleBar title="Last minute" :data="topSports" />
+
+  <SportOdds :showMore="1" :data="lastMinute" />
+
+  <TitleBar
+    title="Live Events"
+    :data="[
+      'Football',
+      'Basketball',
+      'Tennis',
+      'Ice Hockey',
+      'American Football',
+    ]"
+  />
+
+  <LiveSportOdd />
+</template>
