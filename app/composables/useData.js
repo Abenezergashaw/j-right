@@ -6,51 +6,53 @@ export function useData() {
 
   // 🧠 function to get flag by name
   const getTopMatch = async () => {
-    const { data } = await axios.get(`${url}/getTopMatches`);
+    const { data } = await axios.get(`${url}/api/getTopMatches`);
     return data.Contents;
   };
 
   const getTopLeagues = async () => {
-    const { data } = await axios.get(`${url}/getTopLeagues`);
+    const { data } = await axios.get(`${url}/api/getTopLeagues`);
     return data.SubCategs;
   };
 
   const getEventsPerLeague = async (value) => {
-    const { data } = await axios.get(`${url}/eventsPerLeague?value=${value}`);
+    const { data } = await axios.get(
+      `${url}/api/eventsPerLeague?value=${value}`,
+    );
     return data.Contents;
   };
 
   const getPopMatches = async () => {
-    const { data } = await axios.get(`${url}/getPopMatches`);
+    const { data } = await axios.get(`${url}/api/getPopMatches`);
     return data.Contents;
   };
 
   const getUpcomingMatches = async (start, end) => {
     const { data } = await axios.get(
-      `${url}/upcomingGames?start=${start}&end=${end}`,
+      `${url}/api/upcomingGames?start=${start}&end=${end}`,
     );
     return data.Contents;
   };
 
   const getPregameData = async () => {
-    const { data } = await axios.get(`${url}/getPregameData`);
+    const { data } = await axios.get(`${url}/api/getPregameData`);
     return data;
   };
 
   const getTournamentMatches = async (id, filter) => {
     const { data } = await axios.get(
-      `${url}/tournamentGames?tournament=${id}&filter=${filter}`,
+      `${url}/api/tournamentGames?tournament=${id}&filter=${filter}`,
     );
     return data.Contents.Events;
   };
 
   const getMarketStructure = async () => {
-    const { data } = await axios.get(`${url}/marketStructure`);
+    const { data } = await axios.get(`${url}/api/marketStructure`);
     return data;
   };
 
   const getEvent = async (id) => {
-    const { data } = await axios.get(`${url}/getEvent?matchId=${id}`);
+    const { data } = await axios.get(`${url}/api/getEvent?matchId=${id}`);
     return data;
   };
 
