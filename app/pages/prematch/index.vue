@@ -1,11 +1,5 @@
 <script setup>
-const {
-  getTopMatch,
-  getTopLeagues,
-  getEventsPerLeague,
-  getPopMatches,
-  getUpcomingMatches,
-} = useData();
+const { getEventsPerLeague, getUpcomingMatches } = useData();
 
 const { topLeaguesData, activeSport, topSports, topLeaguesName, activeLeague } =
   useTopLeague();
@@ -782,7 +776,6 @@ async function handleChangeActiveLeague(value) {
 }
 
 onMounted(async () => {
-  await setPrematchData();
   activeLeagueData.value = await getEventsPerLeague(activeLeague.value);
   lastMinute.value = await getUpcomingMatches(0, 50);
 });

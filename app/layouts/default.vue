@@ -7,6 +7,7 @@ const { setTopLeagues } = useTopLeague();
 const { setTopMatches } = useTopMatches();
 const { setPopMatches } = usePopMatches();
 const { checkSession } = useAuth();
+const { topMenu, setPrematchData } = usePrematchData();
 
 loadFromStorage();
 
@@ -64,6 +65,7 @@ const registerModal = ref(false);
 
 onMounted(async () => {
   await checkSession();
+  await setPrematchData();
   await setTopLeagues();
   await setTopMatches();
   await setPopMatches();

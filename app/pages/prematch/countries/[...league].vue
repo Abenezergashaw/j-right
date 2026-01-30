@@ -20,6 +20,7 @@ const filter = computed(() => league.value[3] ?? null);
 const leagueGames = ref([]);
 
 onMounted(async () => {
+  console.log("onMounted fetch tournament", id.value, filter.value);
   leagueGames.value = await getTournamentMatches(id.value, filter.value);
 });
 </script>

@@ -8,9 +8,14 @@ const template = ref({});
 const eventData = ref({});
 const eventInfo = ref(null);
 
-onMounted(async () => {
-  template.value = await getMarketStructure();
-  eventData.value = await getEvent(event);
+onBeforeMount(async () => {
+  const [marketStructureResult, eventDataResult] = await Promise.all([
+    getMarketStructure(),
+    getEvent(event),
+  ]);
+
+  template.value = marketStructureResult;
+  eventData.value = eventDataResult;
   eventInfo.value = eventData?.value?.Contents?.Info;
 });
 </script>

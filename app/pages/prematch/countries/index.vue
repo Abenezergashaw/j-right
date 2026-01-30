@@ -21,9 +21,9 @@ watch(
   { immediate: true },
 );
 
-onMounted(async () => {
-  await setPrematchData(activeSportId.value);
-});
+// onMounted(async () => {
+//   await setPrematchData(activeSportId.value);
+// });
 </script>
 
 <template>
