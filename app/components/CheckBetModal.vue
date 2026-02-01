@@ -5,9 +5,10 @@ defineProps({
   open: Boolean,
 });
 
-const { loadBookedTicket, bookedTicketLoadError } = useTicket();
+const { loadBookedTicket, bookedTicketLoadError, getPrintTicket } = useTicket();
 
 const bookedTicket = ref("");
+const ticketId = ref("");
 
 const close = () => {
   router.back();
@@ -36,10 +37,17 @@ const close = () => {
       <div class="flex justify-center items-center mt-2">
         <input
           type="text"
+          v-model="ticketId"
           class="bg-white h-8 w-[75%] px-2"
           placeholder="Insert the code here..."
         />
-        <button class="bg-[#FBCC01] w-[25%] h-8 text-center font-bold">
+        <button
+          @click="
+            getPrintTicket(ticketId);
+            ticketId = null;
+          "
+          class="bg-[#FBCC01] w-[25%] h-8 text-center font-bold"
+        >
           Load
         </button>
       </div>

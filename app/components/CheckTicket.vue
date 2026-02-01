@@ -1,7 +1,8 @@
 <script setup>
-const { loadBookedTicket, bookedTicketLoadError } = useTicket();
+const { loadBookedTicket, bookedTicketLoadError, getPrintTicket } = useTicket();
 
 const bookedTicket = ref("");
+const ticketId = ref("");
 </script>
 
 <template>
@@ -47,10 +48,15 @@ const bookedTicket = ref("");
       <div class="flex justify-center items-center mt-2">
         <input
           type="text"
+          v-model="ticketId"
           class="bg-white h-8 w-[75%] px-2 md:h-7"
           placeholder="Insert the id here..."
         />
         <button
+          @click="
+            getPrintTicket(ticketId);
+            ticketId = null;
+          "
           class="bg-[#FBCC01] cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
         >
           Load

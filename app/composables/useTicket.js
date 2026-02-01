@@ -30,6 +30,9 @@ const placingBet = ref(false);
 const placingBetError = ref(null);
 const placingBetSuccess = ref(null);
 
+const placedBetId = ref(null);
+const ticketDisplay = ref("");
+
 let placingBetTimer = null;
 
 export function useTicket() {
@@ -134,7 +137,7 @@ export function useTicket() {
 
   const shareTicket = async () => {
     const { url } = useUrl();
-    const { toggleModal } = useAuth();
+    const { toggleModal } = useModal();
 
     const res = await axios.post(`${url}/api/placeFastBet`, {
       tickets: ticket.value,
@@ -209,16 +212,18 @@ export function useTicket() {
         placingBetTimer = setTimeout(() => {
           placingBetError.value = null;
           clearBets();
-        }, 5000);
+        }, 10000);
       }
       return;
     }
 
     placingBetSuccess.value = "Bet placed successfully.";
+    placedBetId.value = res.data?.ticketId;
+
     placingBetTimer = setTimeout(() => {
       placingBetSuccess.value = null;
       clearBets();
-    }, 5000);
+    }, 10000);
 
     checkSession();
   };
@@ -236,6 +241,31 @@ export function useTicket() {
     clearInterval(placingBetTimer);
   };
 
+  const getPrintTicket = async (id) => {
+    const { printModal, toggleModal } = useModal();
+    toggleModal("print");
+    if ((printModal.value = true)) {
+      const response = await axios.get(
+        `http://localhost:3030/getPrintTicket?id=${id}`,
+      );
+
+      ticketDisplay.value = response.data;
+
+      setTimeout(() => {
+        const printWindow = window.open("", "_blank", "width=500,height=600");
+        printWindow.document.open();
+        printWindow.document.write(response.data);
+        printWindow.document.close();
+
+        printWindow.focus();
+        printWindow.print();
+
+        printWindow.close();
+        toggleModal("print");
+      }, 500);
+    }
+  };
+
   return {
     manageBets,
     removeBet,
@@ -251,6 +281,7 @@ export function useTicket() {
     placeBets,
     repeatBet,
     continueBet,
+    getPrintTicket,
     ticket,
     totalBets,
     totalOdds,
@@ -263,5 +294,7 @@ export function useTicket() {
     placingBetError,
     placingBet,
     placingBetSuccess,
+    ticketDisplay,
+    placedBetId,
   };
 }

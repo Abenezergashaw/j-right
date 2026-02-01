@@ -1,5 +1,5 @@
 <script setup>
-const { toggleModal, showShareTicketModal } = useAuth();
+const { toggleModal, showShareTicketModal } = useModal();
 const { ticket, shareTicketId, stake, win, tax, bonus } = useTicket();
 const { copy, copied } = useClipboard();
 

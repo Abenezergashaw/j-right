@@ -8,7 +8,9 @@ const props = defineProps({
   },
 });
 
-const { loggedIn, user, logout, registerModal, toggleModal } = useAuth();
+const { loggedIn, user, logout, registerModal } = useAuth();
+
+const { rightNavigation, toggleModal } = useModal();
 
 const emit = defineEmits(["close"]);
 
@@ -79,7 +81,7 @@ const onKeydown = (e) => {
 };
 
 watch(
-  () => props.open,
+  () => rightNavigation,
   (v) => {
     if (v) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -94,14 +96,10 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
   <Teleport to="body">
     <!-- Backdrop -->
     <transition name="fade">
-      <div
-        v-if="open"
-        class="fixed inset-0 z-40 bg-black/40"
-        @click="$emit('close')"
-      >
+      <div v-if="rightNavigation" class="fixed inset-0 z-40 bg-black/40">
         <button
           class="absolute left-3 top-1 text-2xl text-white font-bold"
-          @click="$emit('close')"
+          @click="toggleModal('right')"
         >
           ✕
         </button>
@@ -111,7 +109,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
     <!-- Panel -->
     <transition name="slide">
       <aside
-        v-if="open"
+        v-if="rightNavigation"
         class="fixed inset-y-0 right-0 z-40 w-[90%] max-w-sm bg-[#e6e6e6] shadow-xl flex flex-col"
       >
         <div
@@ -151,18 +149,24 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
               <span>{{ user?.rBalance }} ETB</span>
             </div>
             <div class="flex justify-between gap-2">
-              <NuxtLink
-                to="/payment/deposit"
+              <div
+                @click="
+                  $router.push('/payment/deposit');
+                  toggleModal('right');
+                "
                 class="px-3 py-1 uppercase bg-[#FBCC01] font-semibold"
               >
                 Deposit
-              </NuxtLink>
-              <NuxtLink
-                to="/payment/withdraw"
+              </div>
+              <div
+                @click="
+                  $router.push('/payment/withdraw');
+                  toggleModal('right');
+                "
                 class="px-3 py-1 uppercase bg-[#FBCC01] font-semibold"
               >
                 Withdraw
-              </NuxtLink>
+              </div>
             </div>
           </div>
 
@@ -196,14 +200,17 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
             </div>
           </div>
 
-          <NuxtLink
+          <div
             v-for="value in accountSettings"
-            :to="value.to"
+            @click="
+              $router.push(`${value.to}`);
+              toggleModal('right');
+            "
             class="h-10 border-b border-gray-400 px-2 flex justify-start gap-2 items-center"
           >
             <UIcon :name="value.icon" class="h-5 w-5" />
             {{ value.name }}
-          </NuxtLink>
+          </div>
 
           <div
             @click="logout"

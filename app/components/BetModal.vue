@@ -12,6 +12,7 @@ const {
   placingBet,
   placingBetError,
   placingBetSuccess,
+  placedBetId,
   removeBet,
   incrementStake,
   decrementStake,
@@ -23,6 +24,7 @@ const {
   placeBets,
   continueBet,
   repeatBet,
+  getPrintTicket,
 } = useTicket();
 
 const { loggedIn, toggleModal, showShareTicketModal } = useAuth();
@@ -80,21 +82,39 @@ const quickStakes = [20, 50, 1000, 500];
     </div>
 
     <div
-      v-else-if="placingBetError !== null"
-      class="bg-[#e6e6e6] h-24 flex flex-col gap-1 justify-center items-center text-xs"
+      v-else-if="placingBetSuccess !== null"
+      class="bg-[#e6e6e6] p-2 text-xs flex flex-col gap-2"
     >
-      <UIcon name="oi:ban" class="text-red-500 h-7 w-7" />
-      <div>{{ placingBetError }}</div>
-      <div class="flex gap-1 py-1 text-xs px-1">
-        <div
-          @click="repeatBet()"
-          class="bg-white h-10 font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
-        >
-          Repeat Bet
+      <!-- Icon + message -->
+      <div class="flex flex-col items-center gap-1 text-sm">
+        <UIcon name="mdi:check-circle" class="text-green-500 h-7 w-7" />
+        <div>Your Bet Has Been Placed</div>
+        <div>Good Luck !</div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col gap-1">
+        <!-- Top row: 50% / 50% -->
+        <div class="flex w-full gap-1">
+          <div
+            @click="repeatBet()"
+            class="flex-1 bg-white h-10 font-semibold rounded-sm border border-gray-700 flex justify-center items-center uppercase cursor-pointer"
+          >
+            Repeat Bet
+          </div>
+
+          <div
+            @click="getPrintTicket(placedBetId)"
+            class="flex-1 bg-white h-10 font-semibold rounded-sm border border-gray-700 flex justify-center items-center uppercase cursor-pointer"
+          >
+            Print ticket
+          </div>
         </div>
+
+        <!-- Bottom: 100% width -->
         <div
           @click="continueBet()"
-          class="bg-[#FBCC01] h-10 font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
+          class="w-full h-10 bg-[#FBCC01] font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
         >
           Continue
         </div>
@@ -102,11 +122,11 @@ const quickStakes = [20, 50, 1000, 500];
     </div>
 
     <div
-      v-else-if="placingBetSuccess !== null"
+      v-else-if="placingBetError !== null"
       class="bg-[#e6e6e6] h-24 flex flex-col gap-1 justify-center items-center text-xs"
     >
-      <UIcon name="mdi:check-circle" class="text-green-500 h-7 w-7" />
-      <div>Bet placed successfully.</div>
+      <UIcon name="oi:ban" class="text-red-500 h-7 w-7" />
+      <div>{{ placingBetError }}</div>
       <div class="flex gap-1 py-1 text-xs px-1">
         <div
           @click="repeatBet()"

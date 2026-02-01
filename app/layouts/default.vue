@@ -181,5 +181,7 @@ onMounted(async () => {
     <LoginModal :open="loginModal" @close="loginModal = false" />
     <RegisterModal :open="registerModal" @close="registerModal = false" />
     <ShareTicket />
+
+    <PrintedTicket />
   </UApp>
 </template>

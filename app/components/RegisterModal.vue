@@ -9,7 +9,8 @@ defineProps({
   },
 });
 
-const { register, registerModal, registerError, toggleModal } = useAuth();
+const { register, registerError } = useAuth();
+const { toggleModal, registerModal } = useModal();
 
 // Form state
 const phone = ref("");

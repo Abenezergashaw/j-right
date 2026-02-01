@@ -826,5 +826,5 @@ onMounted(async () => {
     ]"
   />
 
-  <LiveSportOdd />
+  <LiveSportOdd v-if="false" />
 </template>

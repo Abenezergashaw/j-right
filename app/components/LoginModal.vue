@@ -9,7 +9,8 @@ defineProps({
   },
 });
 
-const { login, loginModal, toggleModal, loginError } = useAuth();
+const { login, loginError } = useAuth();
+const { loginModal, toggleModal } = useModal();
 
 // Form state
 const phone = ref("934596919");
@@ -50,7 +51,7 @@ const submitForm = () => {
 
         <!-- Logo -->
         <div
-          class="mb-4 text-center flex flex-col justify-center items-center gap-4"
+          class="mb-4 text-center flex flex-col justify-center items-center gap-4 max-w-80"
         >
           <img
             src="https://jambobet.bet/images/originalLogo.png"

@@ -3,7 +3,7 @@ defineProps({
   openLeftNavigation: Boolean,
 });
 
-const { loggedIn, user } = useAuth();
+const { loggedIn, user, login } = useAuth();
 
 const socialMedia = ref([
   {
@@ -33,7 +33,7 @@ const socialMedia = ref([
   },
 ]);
 
-const { login } = useAuth();
+const { toggleModal } = useModal();
 
 const showBalance = ref(true);
 
@@ -62,9 +62,11 @@ const handleLogin = () => {
     class="fixed top-0 left-0 right-0 z-40 p-1 bg-[#FBCC01] border-b border-gray-100 h-10"
   >
     <!-- Mobile  -->
-    <div class="flex justify-between items-center md:hidden">
+    <div
+      class="flex justify-between items-center md:hidden h-10 overflow-hidden"
+    >
       <UButton
-        @click="$emit('openLeftNavigation')"
+        @click="toggleModal('left')"
         icon="i-lucide-align-left"
         size="xl"
         class="text-black"
@@ -73,13 +75,13 @@ const handleLogin = () => {
 
       <img
         @click="$router.push('/prematch')"
-        class="w-[52%] max-w-[180px] mx-auto"
-        src="https://jambobet.bet/images/logo.png"
+        class="object-contain h-20 w-[52%] max-w-[180px] mx-auto"
+        src="/images/logo.png"
         alt=""
       />
 
       <UButton
-        @click="$emit('openRightNavigation')"
+        @click="toggleModal('right')"
         icon="i-lucide-align-right"
         size="xl"
         class="text-black"

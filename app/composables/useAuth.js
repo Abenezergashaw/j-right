@@ -15,10 +15,6 @@ if (saved !== null) {
   loggedIn.value = saved === "true";
 }
 
-const registerModal = ref(false);
-const loginModal = ref(false);
-const showShareTicketModal = ref(false);
-
 const loginError = ref(null);
 const registerError = ref(null);
 
@@ -35,6 +31,7 @@ export function useAuth() {
 
   const register = async (form) => {
     const { url } = useUrl();
+    const { toggleModal } = useModal();
 
     registerError.value = null;
 
@@ -55,12 +52,13 @@ export function useAuth() {
 
     const ok = checkSession();
     if (ok) {
-      registerModal.value = false;
+      toggleModal("register");
     }
   };
 
   const login = async (form) => {
     const { url } = useUrl();
+    const { toggleModal } = useModal();
 
     loginError.value = null;
 
@@ -80,7 +78,7 @@ export function useAuth() {
 
     const ok = checkSession();
     if (ok) {
-      loginModal.value = false;
+      toggleModal("login");
     }
   };
 
@@ -117,34 +115,16 @@ export function useAuth() {
     loggedIn.value = false;
   };
 
-  const toggleModal = (modal) => {
-    if (modal === "login") {
-      loginError.value = null;
-      loginModal.value = !loginModal.value;
-    }
-    if (modal === "register") {
-      registerError.value = null;
-      registerModal.value = !registerModal.value;
-    }
-    if (modal === "share") {
-      showShareTicketModal.value = !showShareTicketModal.value;
-    }
-  };
-
   return {
     user,
     loggedIn,
     rBalance,
     bBalance,
-    loginModal,
-    registerModal,
-    showShareTicketModal,
     loginError,
     registerError,
     register,
     login,
     checkSession,
     logout,
-    toggleModal,
   };
 }
