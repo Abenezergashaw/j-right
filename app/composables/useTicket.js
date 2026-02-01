@@ -243,11 +243,10 @@ export function useTicket() {
 
   const getPrintTicket = async (id) => {
     const { printModal, toggleModal } = useModal();
+    const { url } = useUrl();
     toggleModal("print");
     if ((printModal.value = true)) {
-      const response = await axios.get(
-        `http://localhost:3030/getPrintTicket?id=${id}`,
-      );
+      const response = await axios.get(`${url}/getPrintTicket?id=${id}`);
 
       ticketDisplay.value = response.data;
 
