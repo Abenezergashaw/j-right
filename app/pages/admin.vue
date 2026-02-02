@@ -2,8 +2,13 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
+definePageMeta({
+  layout: "noside",
+});
+
+const router = useRouter();
 const { url } = useUrl();
-const { user, checkSession } = useAuth();
+const { user, checkSession, loggedIn } = useAuth();
 
 const users = ref([]);
 const activeTab = ref(0);
@@ -37,8 +42,8 @@ const loading = ref(false);
 let cancelToken;
 
 const tabs = [
-  { label: "Users", value: 0 },
   { label: "Summary", value: 1 },
+  { label: "Users", value: 0 },
 ];
 
 function selectTab(value) {
@@ -174,6 +179,8 @@ async function createUser() {
 
 onMounted(() => {
   setTimeout(() => {
+    if (!loggedIn.value) return router.push("/prematch");
+
     fetchUsers();
   }, 1500);
 });
@@ -191,7 +198,7 @@ onMounted(() => {
         v-for="tab in tabs"
         :key="tab.value"
         @click="selectTab(tab.value)"
-        class="flex-1 px-4 py-1"
+        class="flex-1 px-4 py-1 cursor-pointer"
         :class="activeTab === tab.value ? 'border-b-2 border-[#FBCC01]' : ''"
       >
         {{ tab.label }}
@@ -200,7 +207,10 @@ onMounted(() => {
 
     <div v-if="activeTab == 0">
       <div class="flex justify-center px-2 my-3 items-center cursor-pointer">
-        <div @click="createModal = true" class="p-2 bg-[#ffcb00] w-full">
+        <div
+          @click="createModal = true"
+          class="p-2 bg-[#ffcb00] w-full flex justify-center cursor-pointer"
+        >
           Create new user
         </div>
       </div>
@@ -283,7 +293,9 @@ onMounted(() => {
     ></div>
 
     <div v-if="depositModal" class="fixed inset-0 bg-black/50 z-50">
-      <div class="w-[90%] mx-auto bg-[#e6e6e6] p-2 mt-20 rounded">
+      <div
+        class="w-[90%] max-w-80 mx-auto bg-[#e6e6e6] p-2 mt-20 md:mt-30 rounded"
+      >
         <div class="flex justify-between border-b">
           <span>Deposit</span>
           <button
@@ -316,7 +328,9 @@ onMounted(() => {
     </div>
 
     <div v-if="withdrawModal" class="fixed inset-0 bg-black/50 z-50">
-      <div class="w-[90%] mx-auto bg-[#e6e6e6] p-2 mt-20 rounded">
+      <div
+        class="w-[90%] max-w-80 mx-auto bg-[#e6e6e6] p-2 mt-20 md:mt-30 rounded"
+      >
         <div class="flex justify-between border-b">
           <span>Withdraw</span>
           <button
@@ -349,7 +363,9 @@ onMounted(() => {
     </div>
 
     <div v-if="createModal" class="fixed inset-0 bg-black/50 z-50">
-      <div class="w-[90%] mx-auto bg-[#e6e6e6] p-2 mt-20 rounded">
+      <div
+        class="w-[90%] max-w-80 mx-auto bg-[#e6e6e6] p-2 mt-20 md:mt-30 rounded"
+      >
         <!-- Header -->
         <div class="flex justify-between border-b">
           <span>Create User</span>

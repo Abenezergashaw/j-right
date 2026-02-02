@@ -87,8 +87,8 @@ onMounted(async () => {
       <!-- Logo (desktop only) -->
       <img
         @click="$router.push('/prematch')"
-        class="hidden md:block cursor-pointer h-20"
-        src="/images/logo.png"
+        class="hidden md:block h-8 cursor-pointer"
+        src="https://jambobet.bet/images/logo.png"
         alt="Logo"
       />
 
@@ -113,53 +113,10 @@ onMounted(async () => {
       </div>
     </nav>
 
-    <div
-      class="hidden fixed top-22 left-0 right-0 z-50 h-7 bg-[#e6e6e6] md:flex justify-start items-center border-b border-gray-400"
-    >
-      <NuxtLink
-        class="text-xs font-semibold px-3 cursor-pointer"
-        v-for="menu in desktopMenu"
-        :to="menu.to"
-      >
-        {{ menu.name }}
-      </NuxtLink>
-    </div>
-
-    <TotalOddFloating
-      v-if="totalBets > 0"
-      @click="handleOpenBetModal"
-      :bets="totalBets"
-      :totalOdds="totalOdds"
-    />
-
     <!-- Main Content -->
     <UMain class="mt-22 md:mt-29 flex-1 py-0 h-[calc(100dvh-88px)]">
-      <div
-        class="hidden md:grid fixed top-29 left-0 w-full h-screen grid-cols-[22%_1fr_22%] overflow-hidden bg-white"
-      >
-        <aside
-          class="h-full overflow-y-auto overscroll-contain border-r border-gray-200"
-        >
-          <LeftMenu />
-        </aside>
-
-        <main
-          class="h-full overflow-y-auto overscroll-contain border-r-6 border-l-6 border-gray-100"
-        >
-          <slot />
-        </main>
-
-        <aside
-          class="h-full overflow-y-auto overscroll-contain border-l border-gray-200"
-        >
-          <Betslip />
-        </aside>
-      </div>
-
-      <div class="hidden md:block h-screen"></div>
-
       <!-- Mobile fallback -->
-      <div class="md:hidden">
+      <div class="w-full md:w-[60%] mx-auto">
         <slot />
       </div>
     </UMain>

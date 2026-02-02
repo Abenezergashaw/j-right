@@ -130,7 +130,11 @@ const handleLogin = () => {
             Register
           </div>
         </div>
-        <div v-else class="flex justify-start items-center gap-3">
+        <div
+          v-else
+          class="flex justify-start items-center gap-4"
+          style="gap: 16px !important"
+        >
           <UIcon name="octicon:person-fill-24" class="h-5 w-5" />
           <div
             v-if="showBalance"
@@ -140,8 +144,9 @@ const handleLogin = () => {
             <div>{{ user?.rBalance }} ETB</div>
           </div>
           <div
-            v-if="showBalance"
+            v-if="false"
             class="flex flex-col justify-center items-center font-semibold"
+            style="display: flex; flex-direction: column"
           >
             <div class="font-bold">Bonus Balance</div>
             <div>{{ user?.bBalance }} ETB</div>

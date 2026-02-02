@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
 
+const router = useRouter();
 const { getBets } = useBets();
+const { loggedIn } = useAuth();
 
 const bets = ref([]);
 const activeTab = ref(4);
@@ -48,10 +50,9 @@ function formatDate(iso) {
   );
 }
 
-formatDate("2026-01-14T13:31:36.000Z");
-
 onMounted(async () => {
-  bets.value = await getBets();
+  if (!loggedIn.value) return router.push("/prematch");
+  // bets.value = await getBets();
 });
 </script>
 
@@ -77,6 +78,15 @@ onMounted(async () => {
         {{ tab.label }}
       </button>
     </div>
+
+    <DateSelect
+      @change="
+        async ({ start, end }) => {
+          console.log(start, end);
+          bets = await getBets(start, end);
+        }
+      "
+    />
 
     <!-- Panels -->
     <div class="py-2 text-xs space-y-1">
