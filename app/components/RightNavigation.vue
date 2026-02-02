@@ -142,6 +142,17 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
           </div>
 
           <div
+            @click="
+              $router.push('/admin');
+              toggleModal('right');
+            "
+            class="h-10 border-b border-gray-400 px-2 flex justify-start gap-2 items-center text-red-900"
+          >
+            <UIcon name="ri:admin-fill" class="h-5 w-5" />
+            Admin
+          </div>
+
+          <div
             class="py-2 border-b border-gray-400 px-2 flex justify-between gap-2 items-center"
           >
             <div class="flex flex-col justify-start">
