@@ -7,6 +7,9 @@ const {
   win,
   tax,
   bonus,
+  possibleWin,
+  actualWinning,
+  bonusPercent,
   placingBet,
   placingBetError,
   placingBetSuccess,
@@ -303,11 +306,11 @@ const quickStakes = [20, 50, 1000, 500];
 
     <!-- Winning  -->
     <div
-      v-if="win > 0"
+      v-if="possibleWin > 0"
       class="h-20 md:h-14 bg-[#5B5B5B] rounded-md flex flex-col items-center justify-center gap-1 text-white font-semibold my-1"
     >
       <span class="text-xs">Potential Winning</span>
-      <span class="text-base md:text-lg">{{ win.toFixed(2) }} ETB</span>
+      <span class="text-base md:text-lg">{{ possibleWin.toFixed(2) }} ETB</span>
     </div>
 
     <!-- After Tax  -->
@@ -316,7 +319,7 @@ const quickStakes = [20, 50, 1000, 500];
       class="h-20 md:h-14 bg-[#5B5B5B] rounded-md flex flex-col items-center justify-center gap-1 text-white font-semibold my-1"
     >
       <span class="text-xs">After Tax</span>
-      <span class="text-lg">{{ (win - tax).toFixed(2) }} ETB</span>
+      <span class="text-lg">{{ actualWinning.toFixed(2) }} ETB</span>
     </div>
 
     <!-- Bonus  -->
@@ -324,7 +327,7 @@ const quickStakes = [20, 50, 1000, 500];
       v-if="bonus > 0"
       class="h-10 border border-dotted border-black flex justify-between px-2 items-center text-xs bg-white my-1"
     >
-      <span>Bonus 10%</span>
+      <span>Bonus {{ bonusPercent }}%</span>
       <span>+ {{ bonus.toFixed(2) }}</span>
     </div>
 

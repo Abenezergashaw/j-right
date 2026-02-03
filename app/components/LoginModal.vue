@@ -40,7 +40,9 @@ const submitForm = () => {
       v-if="loginModal"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 text-xs"
     >
-      <div class="relative w-[90%] rounded-md bg-[#f5c400] p-4 font-sans">
+      <div
+        class="relative w-[90%] md:max-w-80 rounded-md bg-[#f5c400] p-4 font-sans"
+      >
         <!-- Close -->
         <button
           class="absolute right-3 top-3 text-lg font-bold text-white cursor-pointer"
@@ -53,11 +55,7 @@ const submitForm = () => {
         <div
           class="mb-4 text-center flex flex-col justify-center items-center gap-4 max-w-80"
         >
-          <img
-            src="https://jambobet.bet/images/originalLogo.png"
-            alt=""
-            class="h-20"
-          />
+          <img src="/images/logo.png" alt="" class="h-20" />
         </div>
 
         <!-- Form -->

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Watermark Example</title>
+
+    <style>
+      /* Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f4f4;
+        padding: 40px;
+        position: relative;
+      }
+
+      /* Page container */
+      .page {
+        position: relative;
+        background: #ffffff;
+        padding: 40px;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+      }
+
+      /* Watermark */
+      .page::before {
+        content: "RIGHTBET";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 80px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.06);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: -1;
+        user-select: none;
+      }
+
+      h1 {
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      /* Print support */
+      @media print {
+        body {
+          background: none;
+          padding: 0;
+        }
+
+        .page {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h1>Withdrawal Receipt</h1>
+
+      <p>This document confirms a successful withdrawal transaction.</p>
+
+      <p>
+        User ID: <strong>123456</strong><br />
+        Phone: <strong>+251900000000</strong><br />
+        Amount: <strong>500 ETB</strong>
+      </p>
+
+      <p>Date: <strong>2026-02-02 14:35:10</strong></p>
+
+      <p>Thank you for using RIGHTBET.</p>
+    </div>
+  </body>
+</html>

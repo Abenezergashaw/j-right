@@ -1,6 +1,9 @@
 import { ref } from "vue";
 import axios from "axios";
 
+const { currentBonus } = useBonus();
+const { MAX_WIN, TAX } = useConfig();
+
 const ticket = ref([]);
 const totalBets = computed(() => ticket.value.length);
 const totalOdds = computed(() =>
@@ -11,16 +14,28 @@ const totalOdds = computed(() =>
 const stake = ref("20");
 const win = computed(() => {
   const w = totalOdds.value * Number(stake.value);
-  if (w >= 200000) return 200000;
   return w;
 });
-const tax = computed(() => {
-  if (win.value < 1000) return 0;
-  return win.value * 0.15;
-});
+
 const bonus = computed(() => {
-  if (win.value > 1000) return win.value * 0.1;
-  return 0;
+  const b = currentBonus(totalBets.value);
+  return win.value * b;
+});
+
+const possibleWin = computed(() => {
+  const w = win.value + bonus.value;
+  return Math.min(w, MAX_WIN);
+});
+
+const tax = computed(() => {
+  if (possibleWin.value < 1000 || possibleWin.value >= 200000) return 0;
+  return possibleWin.value * TAX;
+});
+
+const actualWinning = computed(() => possibleWin.value - tax.value);
+const bonusPercent = computed(() => {
+  const b = currentBonus(totalBets.value) * 100;
+  return b;
 });
 
 const shareTicketId = ref(null);
@@ -251,7 +266,7 @@ export function useTicket() {
       ticketDisplay.value = response.data;
 
       setTimeout(() => {
-        const printWindow = window.open("", "_blank", "width=500,height=600");
+        const printWindow = window.open("", "_blank", "width=800,height=600");
         printWindow.document.open();
         printWindow.document.write(response.data);
         printWindow.document.close();
@@ -261,7 +276,7 @@ export function useTicket() {
 
         printWindow.close();
         toggleModal("print");
-      }, 500);
+      }, 1500);
     }
   };
 
@@ -288,6 +303,9 @@ export function useTicket() {
     win,
     tax,
     bonus,
+    actualWinning,
+    possibleWin,
+    bonusPercent,
     shareTicketId,
     bookedTicketLoadError,
     placingBetError,

@@ -78,7 +78,9 @@ export function useAuth() {
 
     const ok = checkSession();
     if (ok) {
-      toggleModal("login");
+      if (!loggedIn.value) {
+        toggleModal("login");
+      }
     }
   };
 

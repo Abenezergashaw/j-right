@@ -56,7 +56,7 @@ const submitForm = () => {
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 text-xs"
     >
       <div
-        class="relative w-[90%] md:max-w-md rounded-md bg-[#f5c400] p-2 font-sans"
+        class="relative w-[90%] md:max-w-80 rounded-md bg-[#f5c400] p-2 font-sans"
       >
         <!-- Close -->
         <button
@@ -70,11 +70,7 @@ const submitForm = () => {
         <div
           class="mb-2 text-center flex flex-col justify-center items-center gap-4"
         >
-          <img
-            src="https://jambobet.bet/images/originalLogo.png"
-            alt=""
-            class="h-20"
-          />
+          <img src="/images/logo.png" alt="" class="h-20" />
           <p class="font-bold text-white text-sm">Register</p>
         </div>
 
