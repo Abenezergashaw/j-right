@@ -225,7 +225,9 @@ onMounted(async () => {
             </div>
 
             <div class="flex items-center justify-between gap-2 px-2">
-              <span>LOST</span>
+              <span>{{
+                b.status === 1 ? "WON" : b.status === 2 ? "LOST" : "PENDING"
+              }}</span>
               <UIcon
                 :name="
                   b.status === 1

@@ -215,17 +215,3 @@ const handleLogin = () => {
 
   <RegisterModal :open="openRegisterModal" @close="openRegisterModal = false" />
 </template>
-
-<style scoped>
-/* Chrome, Edge, Safari */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-/* input[type="number"] {
-  -moz-appearance: textfield;
-} */
-</style>
