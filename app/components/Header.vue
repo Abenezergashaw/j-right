@@ -155,6 +155,12 @@ const handleLogin = () => {
               style="z-index: 100 !important"
             >
               <ul class="text-sm bg-">
+                <NuxtLink
+                  to="/bethistory"
+                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                >
+                  Bethistory
+                </NuxtLink>
                 <li
                   @click="logout"
                   class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
