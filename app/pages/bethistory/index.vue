@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from "vue";
 
+definePageMeta({
+  layout: "noside",
+});
+
 const router = useRouter();
 const { getBets } = useBets();
 const { loggedIn } = useAuth();
