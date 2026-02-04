@@ -87,8 +87,8 @@ onMounted(async () => {
       <!-- Logo (desktop only) -->
       <img
         @click="$router.push('/prematch')"
-        class="hidden md:block h-8 cursor-pointer"
-        src="https://jambobet.bet/images/logo.png"
+        class="hidden md:block cursor-pointer h-20"
+        src="/images/logo.png"
         alt="Logo"
       />
 
