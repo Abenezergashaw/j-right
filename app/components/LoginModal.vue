@@ -13,8 +13,8 @@ const { login, loginError } = useAuth();
 const { loginModal, toggleModal } = useModal();
 
 // Form state
-const phone = ref("934596919");
-const password = ref("12345678");
+const phone = ref("");
+const password = ref("");
 
 // Computed to enable/disable login button
 const isFormValid = computed(() => {
