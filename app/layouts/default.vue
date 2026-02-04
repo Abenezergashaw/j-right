@@ -82,7 +82,7 @@ onMounted(async () => {
 
     <!-- Top Menu -->
     <nav
-      class="fixed top-10 left-0 right-0 z-40 h-12 px-3 bg-[#FBCC01] text-black text-sm uppercase font-semibold border-b border-red-500 flex items-center gap-4"
+      class="fixed top-10 left-0 right-0 z-30 h-12 px-3 bg-[#FBCC01] text-black text-sm uppercase font-semibold border-b border-red-500 flex items-center gap-4"
     >
       <!-- Logo (desktop only) -->
       <img
@@ -114,7 +114,7 @@ onMounted(async () => {
     </nav>
 
     <div
-      class="hidden fixed top-22 left-0 right-0 z-50 h-7 bg-[#e6e6e6] md:flex justify-start items-center border-b border-gray-400"
+      class="hidden fixed top-22 left-0 right-0 z-30 h-7 bg-[#e6e6e6] md:flex justify-start items-center border-b border-gray-400"
     >
       <NuxtLink
         class="text-xs font-semibold px-3 cursor-pointer"

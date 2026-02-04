@@ -3,7 +3,7 @@ defineProps({
   openLeftNavigation: Boolean,
 });
 
-const { loggedIn, user, login } = useAuth();
+const { loggedIn, user, login, logout } = useAuth();
 
 const socialMedia = ref([
   {
@@ -45,6 +45,8 @@ const password = ref("12345678");
 const isFormValid = computed(() => {
   return phone.value !== "" && password.value.trim() !== "";
 });
+
+const open = ref(false);
 
 const handleLogin = () => {
   if (!isFormValid.value) return;
@@ -135,7 +137,33 @@ const handleLogin = () => {
           class="flex justify-start items-center gap-4"
           style="gap: 16px !important"
         >
-          <UIcon name="octicon:person-fill-24" class="h-5 w-5" />
+          <div
+            class="relative inline-block"
+            @mouseenter="open = true"
+            @mouseleave="open = false"
+          >
+            <!-- Button -->
+            <UIcon
+              name="octicon:person-fill-24"
+              class="h-5 w-5 cursor-pointer"
+            />
+
+            <!-- Hover Menu -->
+            <div
+              v-if="open"
+              class="absolute mt-0 w-40 left-0 bg-white border shadow-lg"
+              style="z-index: 100 !important"
+            >
+              <ul class="text-sm bg-">
+                <li
+                  @click="logout"
+                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          </div>
           <div
             v-if="showBalance"
             class="flex flex-col justify-center items-center font-semibold"
