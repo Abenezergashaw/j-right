@@ -8,6 +8,7 @@ definePageMeta({
 const router = useRouter();
 const { getBets } = useBets();
 const { loggedIn } = useAuth();
+const { getPrintTicket } = useTicket();
 
 const bets = ref([]);
 const activeTab = ref(4);
@@ -67,12 +68,12 @@ onMounted(async () => {
     </div>
 
     <!-- Tabs -->
-    <div class="flex border-b border-gray-100 text-sm font-semibold">
+    <div class="flex border-b border-gray-100 text-sm font-semibold px-6">
       <button
         v-for="(tab, index) in tabs"
         :key="tab.key"
         @click="selectTab(tab.value)"
-        class="flex-1 px-4 py-1 text-center transition-colors"
+        class="flex-1 md:flex-none md:w-30 px-6 py-1 text-center transition-colors"
         :class="
           activeTab === tab.value
             ? 'border-b-2 border-[#FBCC01] text-black'
@@ -93,8 +94,8 @@ onMounted(async () => {
     />
 
     <!-- Panels -->
-    <div class="py-2 text-xs space-y-1">
-      <div>
+    <div class="py-2 text-xs space-y-1 md:px-6 md:w-full md:mx-auto">
+      <div class="md:hidden">
         <div v-for="b in filtered">
           <div
             @click="toggleBet(b.ticketId)"
@@ -167,6 +168,127 @@ onMounted(async () => {
                           : '#E1E1E1',
                   }"
                 ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden md:block">
+        <div
+          class="grid bg-[#ffcb00] items-center w-full p-2 font-semibold"
+          style="grid-template-columns: 24% 10% 8% 8% 6% 6% 8% 10% 10% 10%"
+        >
+          <div>Date and ID</div>
+          <div>Username</div>
+          <div>Bet Type</div>
+          <div>Stake</div>
+          <div>No events</div>
+          <div>Odds</div>
+          <div></div>
+          <div>Status</div>
+          <div>Winning</div>
+          <div></div>
+        </div>
+
+        <div v-for="b in filtered" :key="b.ticketId" class="mb-1">
+          <div
+            @click="toggleBet(b.ticketId)"
+            class="grid items-center w-full p-2 bg-white cursor-pointer"
+            style="grid-template-columns: 24% 10% 8% 8% 6% 6% 8% 10% 10% 10%"
+          >
+            <!-- Date & ID -->
+            <div class="flex flex-col">
+              <div>{{ formatDate(b.date) }}</div>
+              <div class="flex items-center gap-2">
+                ID: {{ b.ticketId }}
+                <UIcon
+                  @click="getPrintTicket(b.ticketId)"
+                  name="material-symbols:print"
+                />
+              </div>
+            </div>
+
+            <div>{{ b.userId }}</div>
+            <div>Prematch</div>
+            <div>{{ b.stake.toFixed(2) }} ETB</div>
+            <div>{{ b.robustbets.length }}</div>
+            <div>{{ b.totalOdds.toFixed(2) }}</div>
+
+            <div class="flex flex-col">
+              <div>Possible win:</div>
+              <div>{{ (b.stake * b.totalOdds).toFixed(2) }} ETB</div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 px-2">
+              <span>LOST</span>
+              <UIcon
+                :name="
+                  b.status === 1
+                    ? 'ix:success-filled'
+                    : b.status === 2
+                      ? 'carbon:close-filled'
+                      : 'stash:circle-duotone'
+                "
+                :style="{
+                  backgroundColor:
+                    b.status === 1
+                      ? 'green'
+                      : b.status === 2
+                        ? 'red'
+                        : '#E1E1E1',
+                }"
+              />
+            </div>
+
+            <div>
+              {{ b.status === 1 ? (b.totalOdds * b.stake).toFixed(2) : 0 }} ETB
+            </div>
+            <div></div>
+          </div>
+          <div v-if="showBet.includes(b.ticketId)">
+            <div
+              v-for="t in b.robustbets"
+              class="grid items-center gap-x-1 w-full px-2 py-1 border-b border-gray-300"
+              style="grid-template-columns: 20% 25% 10% 35% 5% 5%"
+            >
+              <div>
+                <div class="text-[#ffcb00]">{{ formatDate(t.date) }}</div>
+                <div class="text-[#2b2b2b] opacity-75">
+                  Football - {{ t.country }} - {{ t.tournament }}
+                </div>
+              </div>
+
+              <div>
+                <div class="font-semibold">{{ t.teams }}</div>
+              </div>
+
+              <div></div>
+
+              <div>
+                <div>{{ t.market }} - {{ t.priceName }}</div>
+              </div>
+
+              <div>{{ t.odd.toFixed(2) }}</div>
+
+              <div>
+                <UIcon
+                  :name="
+                    t.status === 1
+                      ? 'ix:success-filled'
+                      : t.status === 2
+                        ? 'carbon:close-filled'
+                        : 'stash:circle-duotone'
+                  "
+                  :style="{
+                    backgroundColor:
+                      t.status === 1
+                        ? 'green'
+                        : t.status === 2
+                          ? 'red'
+                          : '#E1E1E1',
+                  }"
+                />
               </div>
             </div>
           </div>

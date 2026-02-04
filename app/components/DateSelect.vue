@@ -83,11 +83,13 @@ watch([fromDate, toDate], ([from, to]) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 items-center flex-wrap w-full">
-    <div class="flex flex-col items-start gap-2 w-full px-8 mt-4">
+  <div
+    class="flex flex-col md:flex-row gap-4 md:gap-8 items-end md:items-center justify-center"
+  >
+    <!-- Period -->
+    <div class="flex flex-col gap-1 w-full md:w-48">
       <label class="text-xs">Period</label>
-      <!-- Preset Select -->
-      <select v-model="preset" class="border h-10 px-2 w-full">
+      <select v-model="preset" class="border h-10 md:h-7 px-2 w-full">
         <option value="all">All</option>
         <option value="today">Today</option>
         <option value="2days">Last 2 Days</option>
@@ -97,15 +99,23 @@ watch([fromDate, toDate], ([from, to]) => {
     </div>
 
     <!-- From -->
-    <div class="flex flex-col items-start gap-2 w-full px-8">
+    <div class="flex flex-col gap-1 w-full md:w-40">
       <label class="text-xs">From</label>
-      <input type="date" v-model="fromDate" class="border h-10 px-2 w-full" />
+      <input
+        type="date"
+        v-model="fromDate"
+        class="border h-10 md:h-7 px-2 w-full"
+      />
     </div>
 
     <!-- To -->
-    <div class="flex flex-col items-start gap-2 w-full px-8">
+    <div class="flex flex-col gap-1 w-full md:w-40">
       <label class="text-xs">To</label>
-      <input type="date" v-model="toDate" class="border h-10 px-2 w-full" />
+      <input
+        type="date"
+        v-model="toDate"
+        class="border h-10 md:h-7 px-2 w-full"
+      />
     </div>
   </div>
 </template>

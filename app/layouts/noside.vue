@@ -82,7 +82,7 @@ onMounted(async () => {
 
     <!-- Top Menu -->
     <nav
-      class="fixed top-10 left-0 right-0 z-40 h-12 px-3 bg-[#FBCC01] text-black text-sm uppercase font-semibold border-b border-red-500 flex items-center gap-4"
+      class="fixed top-10 left-0 right-0 z-30 h-12 px-3 bg-[#FBCC01] text-black text-sm uppercase font-semibold border-b border-red-500 flex items-center gap-4"
     >
       <!-- Logo (desktop only) -->
       <img
@@ -114,9 +114,9 @@ onMounted(async () => {
     </nav>
 
     <!-- Main Content -->
-    <UMain class="mt-22 md:mt-29 flex-1 py-0 h-[calc(100dvh-88px)]">
+    <UMain class="mt-22 md:mt-22 flex-1 py-0 h-[calc(100dvh-88px)]">
       <!-- Mobile fallback -->
-      <div class="w-full md:w-[60%] mx-auto">
+      <div class="w-full md:w-[100%] mx-auto">
         <slot />
       </div>
     </UMain>

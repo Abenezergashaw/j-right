@@ -151,10 +151,10 @@ const handleLogin = () => {
             <!-- Hover Menu -->
             <div
               v-if="open"
-              class="absolute mt-0 w-40 left-0 t-6 bg-white border shadow-lg"
+              class="absolute mt-0 w-40 left-0 t-6 bg-white border shadow-lg py-2"
               style="z-index: 100 !important"
             >
-              <ul class="text-sm bg-">
+              <div class="text-sm flex gap-1 flex-col">
                 <NuxtLink
                   to="/admin"
                   class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
@@ -167,13 +167,13 @@ const handleLogin = () => {
                 >
                   Bethistory
                 </NuxtLink>
-                <li
+                <div
                   @click="logout"
                   class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
                 >
                   Logout
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div
