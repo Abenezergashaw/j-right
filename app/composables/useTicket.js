@@ -51,10 +51,46 @@ const ticketDisplay = ref("");
 let placingBetTimer = null;
 
 export function useTicket() {
+  const addOneHourLocal = (iso) => {
+    if (!iso) return iso;
+
+    const d = new Date(iso);
+    d.setHours(d.getHours() + 1);
+
+    return (
+      d.getFullYear() +
+      "-" +
+      String(d.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(d.getDate()).padStart(2, "0") +
+      "T" +
+      String(d.getHours()).padStart(2, "0") +
+      ":" +
+      String(d.getMinutes()).padStart(2, "0") +
+      ":" +
+      String(d.getSeconds()).padStart(2, "0")
+    );
+  };
+  function addOneHourLocalAndSaveUTC(isoTime) {
+    // Parse (handles both Z and non-Z)
+    const d = new Date(isoTime);
+
+    // Add 1 hour in LOCAL time
+    d.setHours(d.getHours() + 1);
+
+    // Save in UTC format
+    return d.toISOString();
+  }
+
   const manageBets = (bet) => {
     const normalizedBet = { ...bet };
 
     if (normalizedBet.sportId !== 1) return;
+
+    // ⬇️ ADD 1 HOUR (LOCAL) → SAVE AS UTC
+    normalizedBet.startTime = addOneHourLocalAndSaveUTC(
+      normalizedBet.startTime,
+    );
 
     const referenceId = normalizedBet.reference_id;
 
@@ -79,6 +115,7 @@ export function useTicket() {
     } else {
       ticket.value.push(normalizedBet);
     }
+
     saveToStorage(ticket.value);
   };
 
