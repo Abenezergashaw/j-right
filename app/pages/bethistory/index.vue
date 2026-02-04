@@ -20,6 +20,10 @@ const filtered = computed(() => {
   return bets.value.filter((b) => b.status === activeTab.value);
 });
 
+setTimeout(() => {
+  console.log(filtered.value);
+}, 2000);
+
 const showBet = ref([]);
 
 const toggleBet = (id) => {
@@ -217,7 +221,7 @@ onMounted(async () => {
 
             <div class="flex flex-col">
               <div>Possible win:</div>
-              <div>{{ (b.stake * b.totalOdds).toFixed(2) }} ETB</div>
+              <div>{{ b.actualWinning.toFixed(2) }} ETB</div>
             </div>
 
             <div class="flex items-center justify-between gap-2 px-2">
@@ -241,9 +245,7 @@ onMounted(async () => {
               />
             </div>
 
-            <div>
-              {{ b.status === 1 ? (b.totalOdds * b.stake).toFixed(2) : 0 }} ETB
-            </div>
+            <div>{{ b.status === 1 ? b.actualWinning.toFixed(2) : 0 }} ETB</div>
             <div></div>
           </div>
           <div v-if="showBet.includes(b.ticketId)">

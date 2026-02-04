@@ -259,24 +259,36 @@ export function useTicket() {
   const getPrintTicket = async (id) => {
     const { printModal, toggleModal } = useModal();
     const { url } = useUrl();
+
     toggleModal("print");
-    if ((printModal.value = true)) {
+
+    // Fix: Use triple equals for comparison
+    if (printModal.value === true) {
       const response = await axios.get(`${url}/getPrintTicket?id=${id}`);
 
+      if (
+        response.data.error.startsWith("Coupon not found") ||
+        response.data.error
+      )
+        return;
       ticketDisplay.value = response.data;
 
-      setTimeout(() => {
-        const printWindow = window.open("", "_blank", "width=800,height=600");
-        printWindow.document.open();
-        printWindow.document.write(response.data);
-        printWindow.document.close();
+      // Create the window
+      const printWindow = window.open("", "_blank", "width=800,height=600");
+      printWindow.document.open();
+      printWindow.document.write(response.data);
+      printWindow.document.close();
 
-        printWindow.focus();
-        printWindow.print();
-
-        printWindow.close();
-        toggleModal("print");
-      }, 1500);
+      // SOLUTION: Wait for all assets (images/styles) to load
+      printWindow.onload = () => {
+        // Small timeout to ensure the browser has rendered the layout
+        setTimeout(() => {
+          printWindow.focus();
+          printWindow.print();
+          printWindow.close();
+          toggleModal("print");
+        }, 500);
+      };
     }
   };
 
