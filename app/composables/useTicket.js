@@ -28,7 +28,7 @@ const possibleWin = computed(() => {
 });
 
 const tax = computed(() => {
-  if (possibleWin.value < 1000 || possibleWin.value >= 200000) return 0;
+  if (possibleWin.value < 1000) return 0;
   return possibleWin.value * TAX;
 });
 
