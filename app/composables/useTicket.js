@@ -266,11 +266,7 @@ export function useTicket() {
     if (printModal.value === true) {
       const response = await axios.get(`${url}/getPrintTicket?id=${id}`);
 
-      if (
-        response.data.error.startsWith("Coupon not found") ||
-        response.data.error
-      )
-        return;
+      if (response?.data?.error) return;
       ticketDisplay.value = response.data;
 
       // Create the window
