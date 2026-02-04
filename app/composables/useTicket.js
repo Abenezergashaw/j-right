@@ -19,7 +19,7 @@ const win = computed(() => {
 
 const bonus = computed(() => {
   const b = currentBonus(totalBets.value);
-  return win.value * b;
+  return Math.min(win.value * b, 100000);
 });
 
 const possibleWin = computed(() => {
