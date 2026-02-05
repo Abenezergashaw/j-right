@@ -39,8 +39,8 @@ const showBalance = ref(true);
 
 const openRegisterModal = ref(false);
 
-const phone = ref("934596919");
-const password = ref("12345678");
+const phone = ref("");
+const password = ref("");
 
 const isFormValid = computed(() => {
   return phone.value !== "" && password.value.trim() !== "";

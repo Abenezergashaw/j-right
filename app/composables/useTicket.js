@@ -40,6 +40,7 @@ const bonusPercent = computed(() => {
 
 const shareTicketId = ref(null);
 const bookedTicketLoadError = ref(null);
+const cashierCodeError = ref(null);
 
 const placingBet = ref(false);
 const placingBetError = ref(null);
@@ -51,26 +52,6 @@ const ticketDisplay = ref("");
 let placingBetTimer = null;
 
 export function useTicket() {
-  const addOneHourLocal = (iso) => {
-    if (!iso) return iso;
-
-    const d = new Date(iso);
-    d.setHours(d.getHours() + 1);
-
-    return (
-      d.getFullYear() +
-      "-" +
-      String(d.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      String(d.getDate()).padStart(2, "0") +
-      "T" +
-      String(d.getHours()).padStart(2, "0") +
-      ":" +
-      String(d.getMinutes()).padStart(2, "0") +
-      ":" +
-      String(d.getSeconds()).padStart(2, "0")
-    );
-  };
   function addOneHourLocalAndSaveUTC(isoTime) {
     // Parse (handles both Z and non-Z)
     const d = new Date(isoTime);
@@ -221,6 +202,24 @@ export function useTicket() {
     stake.value = res.data.stake;
   };
 
+  const loadCashierTicket = async (id) => {
+    const { url } = useUrl();
+
+    const res = await axios.get(`${url}/api/getCashierTicket?ticketId=${id}`);
+
+    if (res.data.error) {
+      cashierCodeError.value = res.data?.message;
+
+      setTimeout(() => {
+        cashierCodeError.value = null;
+      }, 2000);
+      return;
+    }
+
+    ticket.value = res.data.ticket;
+    stake.value = res.data.stake;
+  };
+
   const placeBets = async () => {
     const { url } = useUrl();
 
@@ -341,6 +340,7 @@ export function useTicket() {
     repeatBet,
     continueBet,
     getPrintTicket,
+    loadCashierTicket,
     ticket,
     totalBets,
     totalOdds,
@@ -353,6 +353,7 @@ export function useTicket() {
     bonusPercent,
     shareTicketId,
     bookedTicketLoadError,
+    cashierCodeError,
     placingBetError,
     placingBet,
     placingBetSuccess,

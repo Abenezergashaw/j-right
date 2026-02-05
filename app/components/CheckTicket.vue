@@ -1,8 +1,15 @@
 <script setup>
-const { loadBookedTicket, bookedTicketLoadError, getPrintTicket } = useTicket();
+const {
+  loadBookedTicket,
+  bookedTicketLoadError,
+  getPrintTicket,
+  loadCashierTicket,
+  cashierCodeError,
+} = useTicket();
 
 const bookedTicket = ref("");
 const ticketId = ref("");
+const cashierCode = ref("");
 </script>
 
 <template>
@@ -44,23 +51,26 @@ const ticketId = ref("");
     </div>
 
     <div class="text-sm md:text-xs text-gray-700 mt-4 px-2">
-      <div class="font-bold text-center">Insert the id to load ticket</div>
+      <div class="font-bold text-center">Insert the code to load</div>
       <div class="flex justify-center items-center mt-2">
         <input
           type="text"
-          v-model="ticketId"
-          class="bg-white h-8 w-[75%] px-2 md:h-7"
-          placeholder="Insert the id here..."
+          v-model="cashierCode"
+          class="bg-white text-black placeholder-gray-400 h-8 md:h-7 w-[75%] px-2 outline-none"
+          placeholder="Insert the code here..."
         />
         <button
-          @click="
-            getPrintTicket(ticketId);
-            ticketId = null;
-          "
+          @click="loadCashierTicket(cashierCode)"
           class="bg-[#FBCC01] cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
         >
           Load
         </button>
+      </div>
+      <div
+        v-if="cashierCodeError !== null"
+        class="text-center text-red-500 font-semibold mt-2"
+      >
+        Ticket Not Found
       </div>
     </div>
 
@@ -75,10 +85,15 @@ const ticketId = ref("");
       <div class="flex justify-center items-center mt-2">
         <input
           type="text"
+          v-model="ticketId"
           class="bg-white h-8 md:h-7 w-[75%] px-2"
           placeholder="Insert the code here..."
         />
         <button
+          @click="
+            getPrintTicket(ticketId);
+            ticketId = null;
+          "
           class="bg-[#FBCC01] cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
         >
           Load
