@@ -159,12 +159,32 @@ export function useTicket() {
     }
   };
 
+  // const loadFromStorage = () => {
+  //   if (process.client) {
+  //     const saved = localStorage.getItem("ticket");
+  //     if (saved) {
+  //       ticket.value = JSON.parse(saved);
+  //     }
+  //   }
+  // };
+
   const loadFromStorage = () => {
-    if (process.client) {
-      const saved = localStorage.getItem("ticket");
-      if (saved) {
-        ticket.value = JSON.parse(saved);
+    if (!process.client) return;
+
+    const saved = localStorage.getItem("ticket");
+
+    // ❌ nothing saved or saved as "undefined"
+    if (!saved || saved === "undefined") return;
+
+    try {
+      const parsed = JSON.parse(saved);
+
+      // extra guard (optional but recommended)
+      if (parsed !== undefined && parsed !== null) {
+        ticket.value = parsed;
       }
+    } catch (err) {
+      console.warn("Invalid ticket in localStorage", err);
     }
   };
 
