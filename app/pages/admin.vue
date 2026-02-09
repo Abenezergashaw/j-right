@@ -314,14 +314,14 @@ onMounted(() => {
       />
 
       <div
-        class="w-full max-w-md my-3 mx-auto bg-slate-900 text-slate-200 rounded-xl p-4 shadow-lg"
+        class="w-full max-w-2xl my-3 mx-auto bg-slate-300 text-slate-900 rounded-xl p-4 shadow-lg"
       >
         <!-- Header -->
-        <div class="text-sm text-slate-400 mb-1">
+        <div class="text-sm text-slate-700 mb-1">
           User ID: {{ summary?.id }}
         </div>
 
-        <div class="text-xs text-slate-500 mb-4">
+        <div class="text-xs text-slate-800 mb-4">
           {{ new Date(summary?.startDate).toLocaleDateString() }}
           →
           {{ new Date(summary?.endDate).toLocaleDateString() }}
