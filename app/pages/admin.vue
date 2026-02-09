@@ -11,7 +11,7 @@ const { url } = useUrl();
 const { user, checkSession, loggedIn } = useAuth();
 
 const users = ref([]);
-const activeTab = ref(0);
+const activeTab = ref(1);
 
 // pagination
 const page = ref(1);
@@ -177,17 +177,34 @@ async function createUser() {
   newUser.value.password = "";
 }
 
+watch(loggedIn, (newVal) => {
+  if (!newVal) return router.push("/prematch");
+});
+
+const summary = ref(null);
+
+const fetchSummary = async (start, end) => {
+  const res = await axios.get(`${url}/getSummary?start=${start}&end=${end}`, {
+    withCredentials: true,
+  });
+
+  if (!res?.data?.error) {
+    summary.value = res.data;
+  }
+};
+
 onMounted(() => {
   setTimeout(() => {
     if (!loggedIn.value) return router.push("/prematch");
 
     fetchUsers();
+    fetchSummary(null, null);
   }, 1500);
 });
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full max-w-4xl mx-auto">
     <div class="h-8 uppercase bg-[#FBCC01] flex justify-center items-center">
       admin
     </div>
@@ -284,6 +301,63 @@ onMounted(() => {
             </button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div v-if="activeTab === 1" class="py-4">
+      <DateSelect
+        @change="
+          async ({ start, end }) => {
+            await fetchSummary(start, end);
+          }
+        "
+      />
+
+      <div
+        class="w-full max-w-md my-3 mx-auto bg-slate-900 text-slate-200 rounded-xl p-4 shadow-lg"
+      >
+        <!-- Header -->
+        <div class="text-sm text-slate-400 mb-1">
+          User ID: {{ summary?.id }}
+        </div>
+
+        <div class="text-xs text-slate-500 mb-4">
+          {{ new Date(summary?.startDate).toLocaleDateString() }}
+          →
+          {{ new Date(summary?.endDate).toLocaleDateString() }}
+        </div>
+
+        <!-- Stats -->
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span>Total Bets</span>
+            <span class="font-semibold">{{ summary?.count }}</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="text-green-400">Total Bet</span>
+            <span class="font-semibold text-green-400">
+              {{ summary?.totalStake.toFixed(2) }}
+            </span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="text-red-400">Total Win </span>
+            <span class="font-semibold text-red-400">
+              {{ summary?.totalWin.toFixed(2) }}
+            </span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="text-blue-400">Bonus</span>
+            <span class="font-semibold text-blue-400">
+              {{ summary?.totalCashback.toFixed(2) }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="my-3 border-t border-slate-700"></div>
       </div>
     </div>
 

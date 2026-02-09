@@ -125,9 +125,7 @@ onMounted(async () => {
                 Odds:
                 <span class="text-red-500">{{ b.totalOdds.toFixed(2) }}</span>
               </div>
-              <div>
-                Possible Win: {{ (b.stake * b.totalOdds).toFixed(2) }} ETB
-              </div>
+              <div>Possible Win: {{ b.actualWinning.toFixed(2) }} ETB</div>
             </div>
             <div
               class="w-2 h-2 rounded-full"
