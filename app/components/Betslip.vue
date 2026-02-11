@@ -137,13 +137,14 @@ const quickStakes = [20, 50, 1000, 500];
       :class="`${t.errors.length > 0 ? 'border-2 border-red-500' : 'border-white'}`"
     >
       <div
-        class="h-8 px-1 bg-[#E6E6E6] flex justify-between items-center border border-b-0 border-white"
+        @click="$router.replace(`/prematch/event/${t.eventId}`)"
+        class="h-8 px-1 bg-[#E6E6E6] flex justify-between items-center border border-b-0 border-white cursor-pointer"
       >
-        <span>{{ t.event_name }}</span>
+        <span class="cursor-pointer">{{ t.event_name }}</span>
         <UIcon
           name="mdi:close"
           class="w-4 h-4 cursor-pointer"
-          @click="removeBet(index)"
+          @click.stop="removeBet(index)"
         />
       </div>
 
