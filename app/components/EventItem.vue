@@ -239,6 +239,25 @@ const allowedFilter = {
     "Yellow Cards: 1st Half Total",
     "Yellow Cards: 2nd Half Total",
   ],
+  Minutes: [
+    "1-15 Min. Winner",
+    "1-30 Min. Winner",
+    "1-60 Min. Winner",
+    "1-75 Min. Winner",
+    "1-15 Min. Double Chance",
+    "1-30 Min. Double Chance",
+    "1-60 Min. Double Chance",
+    "1-75 Min. Double Chance",
+    "1-15 Min. Total Goals",
+    "1-30 Min. Total Goals",
+    "1-60 Min. Total Goals",
+    "1-75 Min. Total Goals",
+    "1-15 Min. Both Teams to Score",
+    "1-30 Min. Both Teams to Score",
+    "1-60 Min. Both Teams to Score",
+    "1-75 Min. Both Teams to Score",
+    "1st Goal Time",
+  ],
 };
 
 const allAllowedMarkets = [...new Set(Object.values(allowedFilter).flat())];
@@ -383,7 +402,7 @@ const handleSelection = (field, market) => {
 
 <template>
   <div class="block md:flex gap-4 justify-center overflow-y-auto no-scrollbar">
-    <div class="w-full h-screen overflow-y-auto no-scrollbar">
+    <div class="w-full overflow-y-auto no-scrollbar">
       <div
         v-if="eventInfo"
         class="rounded-md bg-gray-100 md:w-full text-center text-black relative"
@@ -501,6 +520,7 @@ const handleSelection = (field, market) => {
       </div>
     </div>
   </div>
+  <div class="h-50"></div>
 </template>
 
 <style scoped>

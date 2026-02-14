@@ -97,6 +97,10 @@ export function useTicket() {
       ticket.value.push(normalizedBet);
     }
 
+    // ticket.value.map((t) =>
+    //   console.log("Market Name", t.market_name, "Price Name", t.price_name),
+    // );
+
     saveToStorage(ticket.value);
   };
 
