@@ -42,7 +42,6 @@ const handleSelection = (data, market, marketName) => {
     marketId: 23,
     fieldId: market.FieldTypeId,
   };
-
   manageBets(bet);
 };
 </script>
@@ -124,10 +123,10 @@ const handleSelection = (data, market, marketName) => {
 <style scoped>
 @keyframes selectFlash {
   0% {
-    background-color: #fbcc01;
+    background-color: #49215d;
   }
   50% {
-    background-color: #fbcc01;
+    background-color: #49215d;
   } /* middle color */
   100% {
     background-color: #5b5b5b;

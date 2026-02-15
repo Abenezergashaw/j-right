@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="flex items-center gap-3 px-3 h-10 md:h-7.5 bg-[#FBCC02] text-xs relative"
+    class="flex items-center gap-3 px-3 h-10 md:h-7.5 bg-[#49215D] text-white text-xs relative"
   >
     <ThreeDots />
 
@@ -33,13 +33,13 @@ const props = defineProps({
         @click="$emit('changeSport', item.Id)"
         class="text-xs px-2 py-1 rounded shrink-0 flex justify-center items-center gap-1 font-semibold"
         :class="
-          activeSport === item.Id ? 'bg-[#5B5B5B] text-white' : 'bg-[#FFE000] '
+          activeSport === item.Id ? 'bg-[#856B93] text-white' : 'bg-[#48245a] '
         "
       >
         <UIcon
           name="ri:football-line"
           class="w-4 h-4"
-          :class="activeSport === item.Id ? 'text-white' : 'text-[#666]'"
+          :class="activeSport === item.Id ? 'text-white' : 'text-[#ddd]'"
         />
 
         <span>

@@ -56,12 +56,12 @@ const quickStakes = [20, 50, 1000, 500];
   >
     <!-- Header -->
     <div
-      class="h-10 bg-[#FBCC01] flex justify-between items-center px-2 text-xs border-t border-red-500"
+      class="h-10 bg-[#49215D] text-white flex justify-between items-center px-2 text-xs border-t border-red-500"
     >
       <span class="font-semibold relative">
         Betslip
         <span
-          class="absolute -top-3 -right-6 h-5 w-5 rounded-full bg-[#5B5B5B] text-white flex items-center justify-center text-xs"
+          class="absolute -top-3 -right-6 h-5 w-5 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs"
         >
           {{ totalBets }}
         </span>
@@ -192,7 +192,7 @@ const quickStakes = [20, 50, 1000, 500];
 
       <!-- Bet Type -->
       <div
-        class="h-12 bg-[#5B5B5B] flex justify-center items-center uppercase font-bold text-[#FBCC01] my-1"
+        class="h-12 bg-[#5B5B5B] flex justify-center items-center uppercase font-bold text-orange-300 my-1"
       >
         {{ totalBets === 1 ? "Single" : totalBets > 1 ? "multiple" : "" }}
       </div>

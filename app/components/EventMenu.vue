@@ -30,7 +30,9 @@ const active = ref("All");
       :key="m + Math.random()"
       @click="active = m"
       class="px-4 flex items-center cursor-pointer whitespace-nowrap border-r border-r-gray-400"
-      :class="active === m ? 'bg-[#FBCC01]' : 'bg-[#E6E6E6] text-black'"
+      :class="
+        active === m ? 'bg-[#49215D] text-white' : 'bg-[#E6E6E6] text-black'
+      "
     >
       {{ m }}
     </div>

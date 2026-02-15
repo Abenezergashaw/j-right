@@ -26,7 +26,7 @@ const close = () => {
     style="top: 80px"
   >
     <div
-      class="h-10 border-t border-red-400 px-2 bg-[#FBCC01] flex justify-between items-center text-xs"
+      class="h-10 border-t border-red-400 px-2 bg-[#49215D] text-white flex justify-between items-center text-xs"
     >
       <span class="font-semibold">Check Your Bet</span>
       <UIcon @click="close" name="mdi:close" class="w-5 h-5" />
@@ -46,7 +46,7 @@ const close = () => {
             getPrintTicket(ticketId);
             ticketId = null;
           "
-          class="bg-[#FBCC01] w-[25%] h-8 text-center font-bold"
+          class="bg-[#49215D] text-white w-[25%] h-8 text-center font-bold"
         >
           Load
         </button>
@@ -54,7 +54,7 @@ const close = () => {
     </div>
 
     <div
-      class="h-10 mt-4 px-2 bg-[#FBCC01] flex justify-between items-center text-xs"
+      class="h-10 mt-4 px-2 bg-[#49215D] text-white flex justify-between items-center text-xs"
     >
       <span class="font-semibold">Load booked bet</span>
     </div>
@@ -73,7 +73,7 @@ const close = () => {
             loadBookedTicket(bookedTicket);
             router.back();
           "
-          class="bg-[#FBCC01] w-[25%] h-8 text-center font-bold"
+          class="bg-[#49215D] text-white w-[25%] h-8 text-center font-bold"
         >
           Load
         </button>
@@ -84,7 +84,7 @@ const close = () => {
     </div>
 
     <div
-      class="h-10 mt-4 px-2 bg-[#FBCC01] flex justify-between items-center text-xs"
+      class="h-10 mt-4 px-2 bg-[#49215D] text-white flex justify-between items-center text-xs"
     >
       <span class="font-semibold">Load Ticket</span>
     </div>
@@ -97,7 +97,9 @@ const close = () => {
           class="bg-white h-8 w-[75%] px-2"
           placeholder="Insert the id here..."
         />
-        <button class="bg-[#FBCC01] w-[25%] h-8 text-center font-bold">
+        <button
+          class="bg-[#49215D] text-white w-[25%] h-8 text-center font-bold"
+        >
           Load
         </button>
       </div>

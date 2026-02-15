@@ -119,7 +119,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
           <div>Account already existing?</div>
           <div
             @click="toggleModal('login')"
-            class="h-10 w-full px-6 flex justify-center items-center mx-1 cursor-pointer uppercase bg-[#FBCC01] text-black"
+            class="h-10 w-full px-6 flex justify-center items-center mx-1 cursor-pointer uppercase bg-[#49215D] text-white"
           >
             Login
           </div>
@@ -127,7 +127,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
           <div>New user?</div>
           <div
             @click="toggleModal('register')"
-            class="h-10 w-full px-6 flex justify-center items-center mx-1 cursor-pointer uppercase bg-[#FBCC01] text-black"
+            class="h-10 w-full px-6 flex justify-center items-center mx-1 cursor-pointer uppercase bg-[#49215D] text-white"
           >
             Register
           </div>
@@ -165,7 +165,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
                   $router.push('/payment/deposit');
                   toggleModal('right');
                 "
-                class="px-3 py-1 uppercase bg-[#FBCC01] font-semibold"
+                class="px-3 py-1 uppercase bg-[#49215D] text-white font-semibold"
               >
                 Deposit
               </div>
@@ -174,7 +174,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
                   $router.push('/payment/withdraw');
                   toggleModal('right');
                 "
-                class="px-3 py-1 uppercase bg-[#FBCC01] font-semibold"
+                class="px-3 py-1 uppercase bg-[#49215D] text-white font-semibold"
               >
                 Withdraw
               </div>
@@ -192,14 +192,14 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
             class="flex flex-col gap-1 justify-start px-2 py-0.5 border-b border-gray-400"
           >
             <div
-              class="flex justify-between items-center font-semibold text-[#FBCC01]"
+              class="flex justify-between items-center font-semibold text-[#49215D]"
             >
               <div>Total Balance</div>
               <div>{{ (user?.rBalance + user?.bBalance).toFixed(2) }} ETB</div>
             </div>
             <div class="flex justify-between items-center">
               <div>Balance Withdrawable</div>
-              <div>{{ user?.rBalance }} ETB</div>
+              <div>{{ user?.rBalance.toFixed(2) }} ETB</div>
             </div>
             <div class="flex justify-between items-center">
               <div>Balance Not Withdrawable</div>
@@ -225,7 +225,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
 
           <div
             @click="logout"
-            class="h-12 mt-6 text-sm border-b border-gray-400 px-2 flex justify-start gap-2 items-center bg-[#FBCC01] font-semibold"
+            class="h-12 mt-6 text-sm border-b border-gray-400 px-2 flex justify-start gap-2 items-center bg-[#49215D] text-white font-semibold"
           >
             <UIcon name="fluent:arrow-circle-left-12-filled" class="h-6 w-6" />
             Logout

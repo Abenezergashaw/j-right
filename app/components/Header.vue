@@ -3,7 +3,8 @@ defineProps({
   openLeftNavigation: Boolean,
 });
 
-const { loggedIn, user, login, logout } = useAuth();
+const { loggedIn, user, login, logout, loginDesktop } = useAuth();
+const { loginModal, registerModal } = useModal();
 
 const socialMedia = ref([
   {
@@ -49,19 +50,19 @@ const isFormValid = computed(() => {
 const open = ref(false);
 
 const handleLogin = () => {
-  if (!isFormValid.value) return;
+  if (!isFormValid.value) return (loginModal.value = true);
   const formData = {
     phone: phone.value,
     password: password.value,
   };
 
-  login(formData);
+  loginDesktop(formData);
 };
 </script>
 
 <template>
   <div
-    class="fixed top-0 left-0 right-0 z-40 p-1 bg-[#FBCC01] border-b border-gray-100 h-10"
+    class="fixed top-0 left-0 right-0 z-40 p-1 bg-[#49215D] border-b border-gray-100 h-10"
   >
     <!-- Mobile  -->
     <div
@@ -71,7 +72,7 @@ const handleLogin = () => {
         @click="toggleModal('left')"
         icon="i-lucide-align-left"
         size="xl"
-        class="text-black"
+        class="text-white"
         variant="ghost"
       />
 
@@ -86,7 +87,7 @@ const handleLogin = () => {
         @click="toggleModal('right')"
         icon="i-lucide-align-right"
         size="xl"
-        class="text-black"
+        class="text-white"
         variant="ghost"
       />
     </div>
@@ -115,19 +116,19 @@ const handleLogin = () => {
             placeholder="Password"
           />
           <div
-            class="h-7 w-7 flex justify-center items-center border border-black mx-1 cursor-pointer"
+            class="h-7 w-7 flex justify-center items-center border border-white text-white mx-1 cursor-pointer"
           >
             ?
           </div>
           <div
             @click="handleLogin"
-            class="h-7 px-6 flex justify-center items-center mx-1 cursor-pointer uppercase bg-[#C8102E] text-white"
+            class="h-7 px-6 flex justify-center items-center mx-1 cursor-pointer uppercase text-orange-500 border-orange-500 border rounded hover:opacity-75 transition-all duration-300"
           >
             Login
           </div>
           <div
-            @click="openRegisterModal = true"
-            class="h-7 px-6 flex justify-center items-center mx-1 cursor-pointer uppercase bg-[#C8102E] text-white"
+            @click="registerModal = true"
+            class="h-7 px-6 flex justify-center items-center mx-1 cursor-pointer uppercase text-orange-500 border-orange-500 border rounded hover:opacity-75 transition-all duration-300"
           >
             Register
           </div>
@@ -145,7 +146,7 @@ const handleLogin = () => {
             <!-- Button -->
             <UIcon
               name="octicon:person-fill-24"
-              class="h-5 w-5 cursor-pointer"
+              class="h-5 w-5 cursor-pointer text-white"
             />
 
             <!-- Hover Menu -->
@@ -157,19 +158,19 @@ const handleLogin = () => {
               <div class="text-sm flex gap-1 flex-col">
                 <NuxtLink
                   to="/admin"
-                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-orange-600"
                 >
                   Admin
                 </NuxtLink>
                 <NuxtLink
                   to="/bethistory"
-                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-orange-600"
                 >
                   Bethistory
                 </NuxtLink>
                 <div
                   @click="logout"
-                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-orange-600"
                 >
                   Logout
                 </div>
@@ -178,14 +179,14 @@ const handleLogin = () => {
           </div>
           <div
             v-if="showBalance"
-            class="flex flex-col justify-center items-center font-semibold"
+            class="flex flex-col justify-center items-center font-semibold text-white"
           >
             <div class="font-bold">Real Balance</div>
             <div>{{ user?.rBalance }} ETB</div>
           </div>
           <div
             v-if="false"
-            class="flex flex-col justify-center items-center font-semibold"
+            class="flex flex-col justify-center items-center font-semibold text-white"
             style="display: flex; flex-direction: column"
           >
             <div class="font-bold">Bonus Balance</div>
@@ -194,7 +195,7 @@ const handleLogin = () => {
           <div @click="showBalance = !showBalance">
             <UIcon
               :name="`${!showBalance ? 'garden:eye-hide-fill-16' : 'garden:eye-fill-16'}`"
-              class="h-6 w-6 cursor-pointer"
+              class="h-6 w-6 cursor-pointer text-white"
             />
           </div>
         </div>
@@ -207,7 +208,7 @@ const handleLogin = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <UIcon :name="s.icon" class="h-6 w-6" />
+          <UIcon :name="s.icon" class="h-6 w-6 text-white" />
         </a>
       </div>
     </div>

@@ -41,7 +41,7 @@ const submitForm = () => {
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 text-xs"
     >
       <div
-        class="relative w-[90%] md:max-w-80 rounded-md bg-[#f5c400] p-4 font-sans"
+        class="relative w-[90%] md:max-w-md rounded-md bg-[#49215D] text-white p-4 font-sans"
       >
         <!-- Close -->
         <button
@@ -71,7 +71,7 @@ const submitForm = () => {
               <input
                 type="tel"
                 v-model="phone"
-                class="h-9 bg-[#f5f5f5] w-full rounded-r px-2 text-sm outline-none"
+                class="h-9 bg-[#f5f5f5] text-black w-full rounded-r px-2 text-sm outline-none"
                 placeholder="Number"
               />
             </div>
@@ -82,7 +82,7 @@ const submitForm = () => {
             <input
               type="password"
               v-model="password"
-              class="h-9 bg-[#f5f5f5] w-full rounded px-2 text-sm outline-none"
+              class="h-9 bg-[#f5f5f5] text-black w-full rounded px-2 text-sm outline-none"
               placeholder="Password"
             />
           </div>
@@ -95,7 +95,7 @@ const submitForm = () => {
             :class="
               isFormValid
                 ? 'bg-white text-black cursor-pointer'
-                : 'bg-yellow-200 text-gray-600 cursor-not-allowed'
+                : 'bg-[#512666] opacity-95 cursor-not-allowed'
             "
           >
             LOGIN
@@ -108,16 +108,16 @@ const submitForm = () => {
 
         <!-- Footer -->
         <div
-          class="mt-4 flex justify-center gap-1 items-center text-center text-sm font-semibold text-red-600"
+          class="mt-4 flex justify-center gap-1 items-center text-center text-sm font-semibold text-orange-500"
         >
-          <div class="hover:underline">Forgot Password</div>
-          <span class="mx-2">|</span>
+          <div class="hover:underline cursor-pointer">Forgot Password</div>
+          <span class="mx-2 cursor-pointer">|</span>
           <div
             @click="
               toggleModal('login');
               toggleModal('register');
             "
-            class="hover:underline"
+            class="hover:underline cursor-pointer"
           >
             Create Account
           </div>

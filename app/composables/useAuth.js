@@ -77,6 +77,34 @@ export function useAuth() {
     }
 
     const ok = checkSession();
+    if (ok) {
+      // if (!loggedIn.value) {
+      toggleModal("login");
+      // }
+    }
+  };
+
+  const loginDesktop = async (form) => {
+    const { url } = useUrl();
+    const { toggleModal } = useModal();
+
+    loginError.value = null;
+
+    const response = await axios.post(
+      `${url}/api/login`,
+      {
+        phone: form.phone,
+        password: form.password,
+      },
+      { withCredentials: true },
+    );
+
+    if (!response.data.success) {
+      loginError.value = response.data.message;
+      return;
+    }
+
+    const ok = checkSession();
     if (!ok) {
       // if (!loggedIn.value) {
       toggleModal("login");
@@ -126,6 +154,7 @@ export function useAuth() {
     registerError,
     register,
     login,
+    loginDesktop,
     checkSession,
     logout,
   };

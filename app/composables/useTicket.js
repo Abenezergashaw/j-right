@@ -246,8 +246,9 @@ export function useTicket() {
 
   const placeBets = async () => {
     const { url } = useUrl();
+    const { toggleModal } = useModal();
 
-    const { loggedIn, toggleModal, checkSession } = useAuth();
+    const { loggedIn, checkSession } = useAuth();
 
     if (!loggedIn.value) {
       toggleModal("login");

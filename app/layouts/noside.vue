@@ -82,7 +82,7 @@ onMounted(async () => {
 
     <!-- Top Menu -->
     <nav
-      class="fixed top-10 left-0 right-0 z-30 h-12 px-3 bg-[#FBCC01] text-black text-sm uppercase font-semibold border-b border-red-500 flex items-center gap-4"
+      class="fixed top-10 left-0 right-0 z-30 h-12 px-3 bg-[#49215D] text-white text-sm uppercase font-semibold border-b border-orange-500 flex items-center gap-4"
     >
       <!-- Logo (desktop only) -->
       <img
@@ -101,7 +101,7 @@ onMounted(async () => {
           :key="menu.to"
           :to="menu.to"
           class="px-3 py-1 rounded transition relative"
-          exact-active-class="bg-[#C8102E] text-white "
+          exact-active-class="bg-white text-black "
         >
           {{ menu.label }}
           <span

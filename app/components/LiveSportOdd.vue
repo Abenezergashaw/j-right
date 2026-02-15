@@ -12,7 +12,7 @@
 
     <div class="flex items-stretch text-xs bg-white mb-0.5 h-12">
       <div
-        class="w-[14%] text-center flex flex-col items-center justify-center text-[#fbcc01] font-semibold"
+        class="w-[14%] text-center flex flex-col items-center justify-center text-[#49215D] font-semibold"
       >
         <span>Half 2</span>
         <span>0-2</span>
@@ -41,7 +41,7 @@
     </div>
     <div class="flex items-stretch text-xs bg-white mb-0.5 h-12">
       <div
-        class="w-[14%] text-center flex flex-col items-center justify-center text-[#fbcc01] font-semibold"
+        class="w-[14%] text-center flex flex-col items-center justify-center text-[#49215D] font-semibold"
       >
         <span>Half 2</span>
         <span>0-2</span>

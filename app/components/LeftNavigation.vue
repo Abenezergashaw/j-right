@@ -56,7 +56,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
       >
         <!-- Header -->
         <div
-          class="h-10 bg-[#FBCC01] px-4 flex items-center justify-between border-b"
+          class="h-10 bg-[#49215D] text-white px-4 flex items-center justify-between border-b"
         >
           <span class="font-bold">Menu</span>
         </div>
@@ -64,7 +64,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
         <!-- Content -->
         <div class="flex-1 overflow-y-auto p-1">
           <div
-            class="h-10 bg-[#FBCC01] px-4 flex items-center justify-between border-b uppercase"
+            class="h-10 bg-[#49215D] text-white px-4 flex items-center justify-between border-b uppercase"
           >
             <span class="font-bold text-xs">Choose a sport</span>
           </div>

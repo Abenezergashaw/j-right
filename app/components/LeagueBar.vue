@@ -9,7 +9,7 @@ const router = useRouter();
 <template>
   <div class="h-8 bg-[#E6E6E6] text-xs flex justify-between items-center px-2">
     <div class="flex gap-2 justify-between items-center">
-      <ThreeDots />
+      <ThreeDotsBlack />
       <div class="font-semibold">Football</div>
     </div>
 

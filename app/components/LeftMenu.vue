@@ -8,7 +8,9 @@ const sorted = computed(() => {
 </script>
 
 <template>
-  <div class="h-7 bg-[#FBCC01] px-4 font-bold flex items-center text-[13px]">
+  <div
+    class="h-7 bg-[#49215D] text-white px-4 font-bold flex items-center text-[13px]"
+  >
     Top Leagues
   </div>
   <div class="flex flex-col bg-[#e6e6e6] text-xs">
@@ -26,7 +28,9 @@ const sorted = computed(() => {
     </NuxtLink>
   </div>
 
-  <div class="h-7 bg-[#FBCC01] px-4 font-bold flex items-center text-[13px]">
+  <div
+    class="h-7 bg-[#49215D] text-white px-4 font-bold flex items-center text-[13px]"
+  >
     Sports
   </div>
   <NuxtLink

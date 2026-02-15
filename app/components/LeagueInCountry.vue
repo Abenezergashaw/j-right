@@ -157,7 +157,7 @@ function handleOpenedCountries(index) {
       class="h-8 bg-[#DEDEDE] text-xs flex justify-between items-center px-2"
     >
       <div class="flex gap-2 items-center">
-        <ThreeDots />
+        <ThreeDotsBlack />
         <img
           :src="`/flags/${getFlag(d.Name.International)}`"
           class="w-6 h-4"

@@ -75,7 +75,7 @@ function handleMenu(name, to) {
 
 <template>
   <div
-    class="bg-[#5B5B5B] px-2 py-2 flex items-center gap-3 overflow-x-auto whitespace-nowrap no-scrollbar md:hidden"
+    class="bg-[#333] px-2 py-2 flex items-center gap-3 overflow-x-auto whitespace-nowrap no-scrollbar md:hidden"
   >
     <div
       v-for="menu in sortedItems"
@@ -93,7 +93,7 @@ function handleMenu(name, to) {
       </span>
       <div
         v-if="menu.id === Number(activeSportId)"
-        class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-b-6 border-l-transparent border-r-transparent border-[#FBCC01]"
+        class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-b-6 border-l-transparent border-r-transparent border-orange-500"
       ></div>
     </div>
   </div>

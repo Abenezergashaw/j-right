@@ -30,7 +30,9 @@ function formatDate(iso) {
     class="fixed inset-x-0 z-50 bg-white transition-transform duration-500 overflow-y-auto no-scrollbar w-[90%] max-w-100 mx-auto my-2"
     style="top: 40px"
   >
-    <div class="h-10 bg-[#FBCC01] flex justify-between items-center px-2">
+    <div
+      class="h-10 bg-[#49215D] text-white flex justify-between items-center px-2"
+    >
       <span>Printed Ticket</span>
       <UIcon
         name="ic:baseline-close"

@@ -46,7 +46,7 @@ onMounted(() => {
   <div class="w-full">
     <!-- Header -->
     <div
-      class="h-10 bg-[#FBCC01] uppercase flex justify-center items-center border-b border-gray-100"
+      class="h-10 bg-[#49215D] text-white uppercase flex justify-center items-center border-b border-gray-100"
     >
       Payments
     </div>

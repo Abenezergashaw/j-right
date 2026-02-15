@@ -1,6 +1,7 @@
 <script setup>
 const { toggleModal, showShareTicketModal } = useModal();
-const { ticket, shareTicketId, stake, win, tax, bonus } = useTicket();
+const { ticket, shareTicketId, stake, win, tax, bonus, actualWinning } =
+  useTicket();
 const { copy, copied } = useClipboard();
 
 function formatDateLabel(iso) {
@@ -22,10 +23,12 @@ function formatDateLabel(iso) {
       <div
         class="relative w-[90%] md:w-[70%] bg-[#e6e6e6] rounded-sm font-sans overflow-y-auto max-h-[80%]"
       >
-        <div class="h-10 bg-[#f5c400] flex px-2 justify-between items-center">
+        <div
+          class="h-10 bg-[#49215D] text-white flex px-2 justify-between items-center"
+        >
           <span>Share on Socials</span>
           <button
-            class="text-lg font-bold text-black cursor-pointer"
+            class="text-lg font-bold text-white cursor-pointer"
             @click="toggleModal('share')"
           >
             ✕
@@ -88,7 +91,7 @@ function formatDateLabel(iso) {
             <div
               class="uppercase text-sm md:text-xs text-center opacity-75 mb-2"
             >
-              {{ win.toFixed(2) }}
+              {{ actualWinning.toFixed(2) }}
             </div>
           </div>
         </div>
@@ -111,7 +114,7 @@ function formatDateLabel(iso) {
           </div>
         </div>
 
-        <div class="hidden md:grid grid-cols-5 bg-[#FBCC01] h-8">
+        <div class="hidden md:grid grid-cols-5 bg-[#49215D] text-white h-8">
           <div
             class="border-r border-b border-r-gray-400 flex justify-center items-center font-semibold"
           >
@@ -171,7 +174,7 @@ function formatDateLabel(iso) {
 
         <div
           @click="toggleModal('share')"
-          class="w-[90%] h-10 flex justify-center items-center uppercase font-semibold my-3 bg-[#FBCC01] mx-auto cursor-pointer"
+          class="w-[90%] h-10 flex justify-center items-center uppercase font-semibold my-3 bg-[#49215D] text-white mx-auto cursor-pointer"
         >
           continue on website
         </div>

@@ -185,10 +185,10 @@ onUnmounted(() => {
 <style scoped>
 @keyframes selectFlash {
   0% {
-    background-color: #fbcc01;
+    background-color: #49215d;
   }
   50% {
-    background-color: #fbcc01;
+    background-color: #49215d;
   } /* middle color */
   100% {
     background-color: #5b5b5b;

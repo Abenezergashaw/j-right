@@ -56,11 +56,11 @@ const submitForm = () => {
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 text-xs"
     >
       <div
-        class="relative w-[90%] md:max-w-80 rounded-md bg-[#f5c400] p-2 font-sans"
+        class="relative w-[90%] md:max-w-md rounded-md bg-[#49215D] text-white p-2 font-sans"
       >
         <!-- Close -->
         <button
-          class="absolute right-3 top-3 text-lg font-bold text-black cursor-pointer"
+          class="absolute right-3 top-3 text-lg font-bold text-white cursor-pointer"
           @click="toggleModal('register')"
         >
           ✕
@@ -78,7 +78,7 @@ const submitForm = () => {
         <form class="space-y-1" @submit.prevent="submitForm">
           <!-- Phone -->
           <div>
-            <label class="mb-1 block text-xs font-semibold text-black">
+            <label class="mb-1 block text-xs font-semibold">
               Phone number <span class="text-red-600">*</span>
             </label>
             <div class="flex">
@@ -90,7 +90,7 @@ const submitForm = () => {
               <input
                 type="tel"
                 v-model="phone"
-                class="h-9 bg-[#f5f5f5] w-full rounded-r px-2 text-sm outline-none"
+                class="h-9 bg-[#f5f5f5] text-black w-full rounded-r px-2 text-sm outline-none"
                 placeholder="Insert your phone number"
               />
             </div>
@@ -98,32 +98,30 @@ const submitForm = () => {
 
           <!-- Password -->
           <div>
-            <label class="mb-1 block text-xs font-semibold text-black">
-              Password
-            </label>
+            <label class="mb-1 block text-xs font-semibold"> Password </label>
             <input
               type="password"
               v-model="password"
-              class="h-9 bg-[#f5f5f5] w-full rounded px-2 text-sm outline-none"
+              class="h-9 bg-[#f5f5f5] text-black w-full rounded px-2 text-sm outline-none"
               placeholder="Enter password"
             />
           </div>
 
           <!-- Confirm Password -->
           <div>
-            <label class="mb-1 block text-xs font-semibold text-black">
+            <label class="mb-1 block text-xs font-semibold">
               Confirm Password
             </label>
             <input
               type="password"
               v-model="confirmPassword"
-              class="h-9 bg-[#f5f5f5] w-full rounded px-2 text-sm outline-none"
+              class="h-9 bg-[#f5f5f5] text-black w-full rounded px-2 text-sm outline-none"
               placeholder="Confirm password"
             />
           </div>
 
           <!-- Checkboxes -->
-          <div class="space-y-2 text-xs text-black">
+          <div class="space-y-2 text-xs">
             <label class="flex items-start gap-2">
               <input type="checkbox" v-model="over18" class="mt-1" />
               <span>
@@ -149,7 +147,7 @@ const submitForm = () => {
             :class="
               isFormValid
                 ? 'bg-white text-black cursor-pointer'
-                : 'bg-yellow-200 text-gray-600 cursor-not-allowed'
+                : 'bg-[#512666] opacity-95 cursor-not-allowed'
             "
           >
             REGISTER
@@ -161,10 +159,21 @@ const submitForm = () => {
         </div>
 
         <!-- Footer -->
-        <div class="mt-4 text-center text-sm font-semibold text-red-600">
+        <div
+          class="mt-4 text-center text-sm font-semibold text-orange-500 flex justify-center gap-1 items-center"
+        >
           <a href="#" class="hover:underline">Support</a>
           <span class="mx-2">|</span>
-          <a href="#" class="hover:underline">Enterr</a>
+          <div
+            @click="
+              toggleModal('login');
+              toggleModal('register');
+            "
+            href="#"
+            class="hover:underline cursor-pointer"
+          >
+            Enter
+          </div>
         </div>
       </div>
     </div>

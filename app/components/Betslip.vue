@@ -35,7 +35,7 @@ const quickStakes = [20, 50, 1000, 500];
 
 <template>
   <div
-    class="h-10 md:h-7 bg-[#FBCC01] flex justify-between items-center px-2 text-xs border-t border-red-500 md:border-0"
+    class="h-10 md:h-7 bg-[#49215D] text-white flex justify-between items-center px-2 text-xs border-t border-red-500 md:border-0"
   >
     <div
       class="font-semibold flex items-center justify-between relative w-full"
@@ -43,7 +43,7 @@ const quickStakes = [20, 50, 1000, 500];
       <span>Betslip</span>
 
       <span
-        class="h-5 w-5 rounded-full bg-[#5B5B5B] text-white flex items-center justify-center text-xs md:static md:ml-2 absolute -top-3 -right-3"
+        class="h-5 w-5 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs md:static md:ml-2 absolute -top-3 -right-3"
       >
         {{ totalBets }}
       </span>
@@ -83,7 +83,7 @@ const quickStakes = [20, 50, 1000, 500];
       </div>
       <div
         @click="continueBet()"
-        class="bg-[#FBCC01] w-30 py-1 font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
+        class="bg-[#49215D] text-white w-30 py-1 font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
       >
         Continue
       </div>
@@ -123,7 +123,7 @@ const quickStakes = [20, 50, 1000, 500];
       <!-- Bottom: 80% width -->
       <div
         @click="continueBet()"
-        class="w-full h-8 bg-[#FBCC01] font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
+        class="w-full h-8 bg-[#49215D] text-white font-semibold rounded-sm border border-gray-200 flex justify-center items-center uppercase cursor-pointer"
       >
         Continue
       </div>
@@ -176,7 +176,7 @@ const quickStakes = [20, 50, 1000, 500];
 
     <!-- Bet Type -->
     <div
-      class="h-12 md:h-8 bg-[#5B5B5B] flex justify-center items-center uppercase font-bold text-[#FBCC01] my-1"
+      class="h-12 md:h-8 bg-[#5B5B5B] text-orange-300 flex justify-center items-center uppercase font-bold my-1"
     >
       {{ totalBets === 1 ? "Single" : totalBets > 1 ? "multiple" : "" }}
     </div>
@@ -328,7 +328,7 @@ const quickStakes = [20, 50, 1000, 500];
       v-if="bonus > 0"
       class="h-10 border border-dotted border-black flex justify-between px-2 items-center text-xs bg-white my-1"
     >
-      <span>Bonus {{ bonusPercent }}%</span>
+      <span>Bonus {{ bonusPercent.toFixed(0) }}%</span>
       <span>+ {{ bonus.toFixed(2) }}</span>
     </div>
 

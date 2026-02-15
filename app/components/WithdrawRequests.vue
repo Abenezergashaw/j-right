@@ -18,7 +18,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="h-8 bg-[#FBCC01] flex text-xs">
+  <div class="h-8 bg-[#49215D] text-white flex text-xs">
     <div
       class="w-[40%] px-1 flex items-center justify-center border-r shrink-0"
       style="width: 22% !important"

@@ -15,7 +15,7 @@ const cashierCode = ref("");
 <template>
   <div class="bg-[#E6E6E6] pb-4">
     <div
-      class="h-10 md:h-8 px-2 bg-[#FBCC01] flex justify-between items-center text-xs"
+      class="h-10 md:h-8 px-2 bg-[#49215D] text-white flex justify-between items-center text-xs"
     >
       <span class="font-semibold">Load booked bet</span>
     </div>
@@ -31,7 +31,7 @@ const cashierCode = ref("");
         />
         <button
           @click="loadBookedTicket(bookedTicket)"
-          class="bg-[#FBCC01] cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
+          class="bg-[#49215D] text-white cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
         >
           Load
         </button>
@@ -45,7 +45,7 @@ const cashierCode = ref("");
     </div>
 
     <div
-      class="h-10 md:h-8 mt-4 px-2 bg-[#FBCC01] flex justify-between items-center text-xs"
+      class="h-10 md:h-8 mt-4 px-2 bg-[#49215D] text-white flex justify-between items-center text-xs"
     >
       <span class="font-semibold">Load Ticket</span>
     </div>
@@ -61,7 +61,7 @@ const cashierCode = ref("");
         />
         <button
           @click="loadCashierTicket(cashierCode)"
-          class="bg-[#FBCC01] cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
+          class="bg-[#49215D] text-white cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
         >
           Load
         </button>
@@ -75,7 +75,7 @@ const cashierCode = ref("");
     </div>
 
     <div
-      class="h-10 md:h-8 mt-4 px-2 bg-[#FBCC01] flex justify-between items-center text-xs"
+      class="h-10 md:h-8 mt-4 px-2 bg-[#49215D] text-white flex justify-between items-center text-xs"
     >
       <span class="font-semibold">Check Your Bet</span>
     </div>
@@ -94,7 +94,7 @@ const cashierCode = ref("");
             getPrintTicket(ticketId);
             ticketId = null;
           "
-          class="bg-[#FBCC01] cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
+          class="bg-[#49215D] text-white cursor-pointer w-[25%] h-8 md:h-7 text-center font-bold"
         >
           Load
         </button>
