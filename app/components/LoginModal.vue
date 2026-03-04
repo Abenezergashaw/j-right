@@ -69,7 +69,7 @@ const submitForm = () => {
                 ET +251
               </div>
               <input
-                type="tel"
+                type="text"
                 v-model="phone"
                 class="h-9 bg-[#f5f5f5] text-black w-full rounded-r px-2 text-sm outline-none"
                 placeholder="Number"

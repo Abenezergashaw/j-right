@@ -62,14 +62,17 @@ const transactionNumber = ref(null);
     <div class="border-b border-gray-200 w-full"></div>
     <div class="font-extralight">50000 ETB</div>
 
-    <div class="opacity-75 flex justify-start w-full px-4">
+    <!-- <div class="opacity-75 flex justify-start w-full px-4">
       1. የተሰጠውን የስልክ ቁጥር ኮፒ ያድርጉ። የሚያስገቡበት ስልክ ቁጥር
+    </div> -->
+    <div class="opacity-75 flex justify-start w-full px-4">
+      1. ከታች የተቀመጠውን ማስፈንጥሪያ በመጫን ወደ ቴሌግራም ቦታችን ይግቡ።
     </div>
-    <div class="opacity-75 text-start flex justify-start w-full px-4">
+    <!-- <div class="opacity-75 text-start flex justify-start w-full px-4">
       Receiver Mobile Number
-    </div>
+    </div> -->
 
-    <div class="opacity-75 text-start flex justify-start w-full px-4">
+    <!-- <div class="opacity-75 text-start flex justify-start w-full px-4">
       <div
         class="h-8 w-30 bg-[#EEEEEE] border border-gray-500 px-2 flex justify-start items-center"
       >
@@ -78,32 +81,43 @@ const transactionNumber = ref(null);
       <div class="h-8 bg-[#F0F0F0] px-3 flex justify-center items-center">
         <UIcon @click="copy('956457051')" name="pixel:copy-solid" />
       </div>
-    </div>
+    </div> -->
 
     <div class="opacity-75 flex justify-start w-full px-4">
+      2. ቦቱ ጋር በመግባት "Deposit" የሚለውን ክምርጡ በኋላ በሚመጣልዎት አማራጭ ገቢ ያድርጉ።
+    </div>
+
+    <NuxtLink
+      to="https://t.me/right_et_bot"
+      target="_blank"
+      class="bg-[#f0bc00] p-2 rounded-md my-2"
+      >Go To Payment Bot</NuxtLink
+    >
+
+    <div class="hidden opacity-75 flex justify-start w-full px-4">
       2. ቴሌብር መተግበሪያዎ ላይ በመግባት “Send money” የሚለውን ከመረጡ በኋላ “To individual” የሚለውን
       በመጫን ኮፒ ያደረጉትን ቁጥር አስገብተው ገቢ ማድረግ የፈለጉትን መጠን ይላኩ።
     </div>
 
-    <div class="opacity-75 flex justify-start w-full px-4">
+    <div class="hidden opacity-75 flex justify-start w-full px-4">
       3. የማረጋገጫ መልዕክት ሲደርስዎ የሚመጣልዎትን የግብይት ቁጥር ኮፒ አድርገው “Transaction Reference”
       ከሚለው በታች ያስገቡ። ማሳሰቢያ፦ የቴሌብር አገልግሎት ክፍያዎች ተፈጻሚ ናቸው።
     </div>
 
-    <div class="opacity-75 text-start flex justify-start w-full px-4">
+    <div class="hidden opacity-75 text-start flex justify-start w-full px-4">
       Transaction ID
     </div>
 
     <input
       type="text"
       v-model="transactionNumber"
-      class="h-8 w-[96%] mx-auto border border-gray-500 px-2"
+      class="hidden h-8 w-[96%] mx-auto border border-gray-500 px-2"
       placeholder="ABCD123456"
     />
 
     <div
       @click="deposit(transactionNumber)"
-      class="w-[96%] bg-[#C85E5E] mx-auto flex justify-center mt-2 items-center py-1 cursor-pointer text-white uppercase h-8 mb-8"
+      class="hidden w-[96%] bg-[#C85E5E] mx-auto flex justify-center mt-2 items-center py-1 cursor-pointer text-white uppercase h-8 mb-8"
       style="background-color: #c85e5e !important"
     >
       Deposit
@@ -111,7 +125,7 @@ const transactionNumber = ref(null);
 
     <div
       v-if="depositError !== null"
-      class="opacity-75 text-red-500 text-center flex justify-center w-full px-4"
+      class="hidden opacity-75 text-red-500 text-center flex justify-center w-full px-4"
     >
       {{ depositError }}
     </div>
