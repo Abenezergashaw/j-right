@@ -317,35 +317,101 @@ export function useTicket() {
     clearInterval(placingBetTimer);
   };
 
+  // const getPrintTicket = async (id) => {
+  //   const { printModal, toggleModal } = useModal();
+  //   const { url } = useUrl();
+
+  //   toggleModal("print");
+
+  //   // Fix: Use triple equals for comparison
+  //   if (printModal.value === true) {
+  //     const response = await axios.get(`${url}/getPrintTicket?id=${id}`);
+
+  //     if (response?.data?.error) return;
+  //     ticketDisplay.value = response.data;
+
+  //     // Create the window
+  //     const printWindow = window.open("", "_blank", "width=800,height=600");
+  //     printWindow.document.open();
+  //     printWindow.document.write(response.data);
+  //     printWindow.document.close();
+
+  //     // SOLUTION: Wait for all assets (images/styles) to load
+  //     printWindow.onload = () => {
+  //       // Small timeout to ensure the browser has rendered the layout
+  //       setTimeout(() => {
+  //         printWindow.focus();
+  //         printWindow.print();
+  //         printWindow.close();
+  //         toggleModal("print");
+  //       }, 500);
+  //     };
+  //   }
+  // };
+
   const getPrintTicket = async (id) => {
-    const { printModal, toggleModal } = useModal();
+    const { toggleModal } = useModal();
     const { url } = useUrl();
 
-    toggleModal("print");
-
-    // Fix: Use triple equals for comparison
-    if (printModal.value === true) {
+    try {
+      // 1. Fetch the ticket data first
       const response = await axios.get(`${url}/getPrintTicket?id=${id}`);
+      if (response?.data?.error || !response.data) return;
 
-      if (response?.data?.error) return;
-      ticketDisplay.value = response.data;
+      // 2. Create a hidden iframe for printing
+      const iframe = document.createElement("iframe");
+      iframe.style.position = "fixed";
+      iframe.style.right = "100%";
+      iframe.style.bottom = "100%";
+      iframe.style.width = "0";
+      iframe.style.height = "0";
+      iframe.style.border = "none";
+      document.body.appendChild(iframe);
 
-      // Create the window
-      const printWindow = window.open("", "_blank", "width=800,height=600");
-      printWindow.document.open();
-      printWindow.document.write(response.data);
-      printWindow.document.close();
+      const doc = iframe.contentWindow.document;
 
-      // SOLUTION: Wait for all assets (images/styles) to load
-      printWindow.onload = () => {
-        // Small timeout to ensure the browser has rendered the layout
-        setTimeout(() => {
-          printWindow.focus();
-          printWindow.print();
-          printWindow.close();
-          toggleModal("print");
-        }, 500);
-      };
+      // 3. Write the content and force styles to be "Print Friendly"
+      doc.open();
+      doc.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>ZemenBet Ticket</title>
+          <style>
+            @page { size: auto; margin: 0mm; }
+            body { margin: 10px; font-family: monospace; }
+          </style>
+        </head>
+        <body>
+          ${response.data}
+          <script>
+            window.onload = () => {
+              // Focus is required for mobile browsers to trigger the print dialog
+              window.focus();
+              window.print();
+            };
+          <\/script>
+        </body>
+      </html>
+    `);
+      doc.close();
+
+      // 4. Handle the cleanup
+      // We wait for the window to focus back (meaning the print dialog closed)
+      window.addEventListener(
+        "focus",
+        function handler() {
+          setTimeout(() => {
+            if (document.body.contains(iframe)) {
+              document.body.removeChild(iframe);
+            }
+          }, 1000);
+          window.removeEventListener("focus", handler);
+        },
+        { once: true },
+      );
+    } catch (error) {
+      console.error("Print Error:", error);
     }
   };
 
