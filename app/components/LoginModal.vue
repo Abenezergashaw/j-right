@@ -110,7 +110,12 @@ const submitForm = () => {
         <div
           class="mt-4 flex justify-center gap-1 items-center text-center text-sm font-semibold text-orange-500"
         >
-          <div class="hover:underline cursor-pointer">Forgot Password</div>
+          <a
+            href="https://t.me/right_et_bot"
+            target="_blank"
+            class="hover:underline cursor-pointer"
+            >Forgot Password</a
+          >
           <span class="mx-2 cursor-pointer">|</span>
           <div
             @click="
