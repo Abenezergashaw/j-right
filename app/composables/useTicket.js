@@ -285,10 +285,10 @@ export function useTicket() {
         });
       } else {
         placingBetError.value = res.data.message;
-        placingBetTimer = setTimeout(() => {
-          placingBetError.value = null;
-          clearBets();
-        }, 10000);
+        // placingBetTimer = setTimeout(() => {
+        //   placingBetError.value = null;
+        //   clearBets();
+        // }, 10000);
       }
       return;
     }
@@ -296,10 +296,10 @@ export function useTicket() {
     placingBetSuccess.value = "Bet placed successfully.";
     placedBetId.value = res.data?.ticketId;
 
-    placingBetTimer = setTimeout(() => {
-      placingBetSuccess.value = null;
-      clearBets();
-    }, 10000);
+    // placingBetTimer = setTimeout(() => {
+    //   placingBetSuccess.value = null;
+    //   clearBets();
+    // }, 10000);
 
     checkSession();
   };
